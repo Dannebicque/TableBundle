@@ -11,33 +11,33 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service class="DA\TableBundle\TableFactory" id="da_table.table_factory" public="false">
+        <service class="DavidAnnebicque\TableBundle\TableFactory" id="da_table.table_factory" public="false">
             <argument type="service" id="da_table.table_registry"/>
             <argument type="service" id="da_table.table_builder_helper"/>
         </service>
-        <service class="DA\TableBundle\DTO\Table" id="da_table.dto.table" public="false"/>
-        <service class="DA\TableBundle\TableRegistry" id="da_table.table_registry" public="false"/>
-        <service class="DA\TableBundle\Adapter\TableAdapter" id="da_table.adapter" public="false"/>
-        <service class="DA\TableBundle\TableRenderer" id="da_table.table_renderer" public="false">
+        <service class="DavidAnnebicque\TableBundle\DTO\Table" id="da_table.dto.table" public="false"/>
+        <service class="DavidAnnebicque\TableBundle\TableRegistry" id="da_table.table_registry" public="false"/>
+        <service class="DavidAnnebicque\TableBundle\Adapter\TableAdapter" id="da_table.adapter" public="false"/>
+        <service class="DavidAnnebicque\TableBundle\TableRenderer" id="da_table.table_renderer" public="false">
             <argument type="service" id="twig"/>
         </service>
-        <service class="DA\TableBundle\Twig\TableExtension" id="da_table.twig.table_extension" public="false">
+        <service class="DavidAnnebicque\TableBundle\Twig\TableExtension" id="da_table.twig.table_extension" public="false">
             <argument type="service" id="da_table.table_renderer"/>
             <tag name="twig.extension"/>
         </service>
-        <service class="DA\TableBundle\TableBuilderHelper" id="da_table.table_builder_helper" public="false">
+        <service class="DavidAnnebicque\TableBundle\TableBuilderHelper" id="da_table.table_builder_helper" public="false">
             <argument type="service" id="da_table.table_registry"/>
             <argument type="service" id="App\Components\Widget\WidgetFactory"/>
             <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
         </service>
 
-        <service id="DA\TableBundle\TableFactory" alias="da_table.table_factory" public="false"/>
-        <service id="DA\TableBundle\DTO\Table" alias="da_table.dto.table" public="false"/>
-        <service id="DA\TableBundle\TableRegistry" alias="da_table.table_registry" public="false"/>
-        <service id="DA\TableBundle\TableBuilderHelper" alias="da_table.table_builder_helper" public="false"/>
-        <service id="DA\TableBundle\TableRenderer" alias="da_table.table_renderer" public="false"/>
-        <service id="DA\TableBundle\Twig\TableExtension" alias="da_table.twig.table_extension" public="false"/>
-        <service id="DA\TableBundle\Adapter\TableAdapter" alias="da_table.adapter" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\TableFactory" alias="da_table.table_factory" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\DTO\Table" alias="da_table.dto.table" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\TableRegistry" alias="da_table.table_registry" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\TableBuilderHelper" alias="da_table.table_builder_helper" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\TableRenderer" alias="da_table.table_renderer" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\Twig\TableExtension" alias="da_table.twig.table_extension" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\Adapter\TableAdapter" alias="da_table.adapter" public="false"/>
     </services>
 </container>

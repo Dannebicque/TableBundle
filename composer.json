@@ -1,0 +1,20 @@
+{
+    "name": "davidannebicque/table-bundle",
+    "description": "Bundle generant un tableau dynamique depuis Symfony",
+    "type": "symfony-bundle",
+    "license": "MPL2.0",
+    "autoload": {
+        "psr-4": {
+            "DavidAnnebicque\\TableBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "David Annebicque",
+            "email": "david.annebicque@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    }
+}

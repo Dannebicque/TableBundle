@@ -7,10 +7,10 @@
  * @lastUpdate 14/05/2022 11:04
  */
 
-namespace DA\TableBundle;
+namespace DavidAnnebicque\TableBundle;
 
-use DA\TableBundle\Column\ColumnType;
-use DA\TableBundle\DTO\Column;
+use DavidAnnebicque\TableBundle\Column\ColumnType;
+use DavidAnnebicque\TableBundle\DTO\Column;
 use App\Components\Widget\Type\WidgetType;
 use App\Components\Widget\WidgetBuilder;
 use App\Components\Widget\WidgetFactory;

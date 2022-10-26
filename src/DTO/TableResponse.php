@@ -7,7 +7,7 @@
  * @lastUpdate 29/08/2021 12:22
  */
 
-namespace DA\TableBundle\DTO;
+namespace DavidAnnebicque\TableBundle\DTO;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 

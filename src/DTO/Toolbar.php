@@ -7,7 +7,7 @@
  * @lastUpdate 23/10/2021 10:37
  */
 
-namespace DA\TableBundle\DTO;
+namespace DavidAnnebicque\TableBundle\DTO;
 
 use App\Components\Widget\DTO\Widget;
 use Symfony\Component\Form\FormInterface;

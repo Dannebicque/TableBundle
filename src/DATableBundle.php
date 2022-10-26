@@ -7,10 +7,10 @@
  * @lastUpdate 25/10/2022 14:35
  */
 
-namespace DA\TableBundle;
+namespace DavidAnnebicque\TableBundle;
 
-use DA\TableBundle\DependencyInjection\Compiler\TableCompilerPass;
-use DA\TableBundle\DependencyInjection\DATableExtension;
+use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\TableCompilerPass;
+use DavidAnnebicque\TableBundle\DependencyInjection\DATableExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

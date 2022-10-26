@@ -7,10 +7,10 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DA\TableBundle\Adapter;
+namespace DavidAnnebicque\TableBundle\Adapter;
 
-use DA\TableBundle\DTO\TableResult;
-use DA\TableBundle\DTO\TableState;
+use DavidAnnebicque\TableBundle\DTO\TableResult;
+use DavidAnnebicque\TableBundle\DTO\TableState;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\CountWalker;

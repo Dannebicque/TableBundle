@@ -7,12 +7,12 @@
  * @lastUpdate 25/10/2022 14:37
  */
 
-namespace DA\TableBundle\DependencyInjection;
+namespace DavidAnnebicque\TableBundle\DependencyInjection;
 
-use DA\TableBundle\Adapter\TableAdapter;
-use DA\TableBundle\Column\ColumnType;
-use DA\TableBundle\TableRegistry;
-use DA\TableBundle\TableType;
+use DavidAnnebicque\TableBundle\Adapter\TableAdapter;
+use DavidAnnebicque\TableBundle\Column\ColumnType;
+use DavidAnnebicque\TableBundle\TableRegistry;
+use DavidAnnebicque\TableBundle\TableType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;

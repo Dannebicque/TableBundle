@@ -7,14 +7,14 @@
  * @lastUpdate 21/10/2022 15:39
  */
 
-namespace DA\TableBundle;
+namespace DavidAnnebicque\TableBundle;
 
-use DA\TableBundle\Adapter\CallableAdapter;
-use DA\TableBundle\Adapter\EntityAdapter;
-use DA\TableBundle\Column\PropertyColumnType;
-use DA\TableBundle\DTO\Paging;
-use DA\TableBundle\DTO\Table;
-use DA\TableBundle\DTO\Toolbar;
+use DavidAnnebicque\TableBundle\Adapter\CallableAdapter;
+use DavidAnnebicque\TableBundle\Adapter\EntityAdapter;
+use DavidAnnebicque\TableBundle\Column\PropertyColumnType;
+use DavidAnnebicque\TableBundle\DTO\Paging;
+use DavidAnnebicque\TableBundle\DTO\Table;
+use DavidAnnebicque\TableBundle\DTO\Toolbar;
 use App\Components\Widget\Type\ButtonType;
 use App\Components\Widget\WidgetBuilder;
 use App\Utils\HtmlUtils;

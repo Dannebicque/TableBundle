@@ -7,7 +7,7 @@
  * @lastUpdate 20/05/2022 07:40
  */
 
-namespace DA\TableBundle;
+namespace DavidAnnebicque\TableBundle;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

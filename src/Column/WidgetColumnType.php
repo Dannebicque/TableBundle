@@ -7,7 +7,7 @@
  * @lastUpdate 08/10/2021 20:09
  */
 
-namespace DA\TableBundle\Column;
+namespace DavidAnnebicque\TableBundle\Column;
 
 use App\Components\Widget\WidgetFactory;
 use App\Components\Widget\WidgetRenderer;

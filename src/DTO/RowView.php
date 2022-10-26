@@ -7,7 +7,7 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DA\TableBundle\DTO;
+namespace DavidAnnebicque\TableBundle\DTO;
 
 use JsonSerializable;
 

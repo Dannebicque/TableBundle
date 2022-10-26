@@ -7,9 +7,9 @@
  * @lastUpdate 14/05/2022 11:04
  */
 
-namespace DA\TableBundle;
+namespace DavidAnnebicque\TableBundle;
 
-use DA\TableBundle\DTO\Table;
+use DavidAnnebicque\TableBundle\DTO\Table;
 
 class TableFactory
 {

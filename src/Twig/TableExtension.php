@@ -7,9 +7,9 @@
  * @lastUpdate 28/08/2021 14:49
  */
 
-namespace DA\TableBundle\Twig;
+namespace DavidAnnebicque\TableBundle\Twig;
 
-use DA\TableBundle\TableRenderer;
+use DavidAnnebicque\TableBundle\TableRenderer;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

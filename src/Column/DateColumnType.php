@@ -7,7 +7,7 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DA\TableBundle\Column;
+namespace DavidAnnebicque\TableBundle\Column;
 
 use DateTimeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

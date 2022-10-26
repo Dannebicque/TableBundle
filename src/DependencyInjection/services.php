@@ -7,24 +7,24 @@
  * @lastUpdate 25/10/2022 22:24
  */
 
-namespace DA\TableBundle\DependencyInjection;
+namespace DavidAnnebicque\TableBundle\DependencyInjection;
 
-use DA\TableBundle\Adapter\CallableAdapter;
-use DA\TableBundle\Adapter\EntityAdapter;
-use DA\TableBundle\Column\BadgeColumnType;
-use DA\TableBundle\Column\BadgeSeuilColumnType;
-use DA\TableBundle\Column\BooleanColumnType;
-use DA\TableBundle\Column\CheckBoxColumnType;
-use DA\TableBundle\Column\ColumnType;
-use DA\TableBundle\Column\DateColumnType;
-use DA\TableBundle\Column\DetailsHandleColumnType;
-use DA\TableBundle\Column\EntityColumnType;
-use DA\TableBundle\Column\LinkColumnType;
-use DA\TableBundle\Column\ManyColumnType;
-use DA\TableBundle\Column\PropertyColumnType;
-use DA\TableBundle\Column\SelectColumnType;
-use DA\TableBundle\Column\WidgetColumnType;
-use DA\TableBundle\TableRegistry;
+use DavidAnnebicque\TableBundle\Adapter\CallableAdapter;
+use DavidAnnebicque\TableBundle\Adapter\EntityAdapter;
+use DavidAnnebicque\TableBundle\Column\BadgeColumnType;
+use DavidAnnebicque\TableBundle\Column\BadgeSeuilColumnType;
+use DavidAnnebicque\TableBundle\Column\BooleanColumnType;
+use DavidAnnebicque\TableBundle\Column\CheckBoxColumnType;
+use DavidAnnebicque\TableBundle\Column\ColumnType;
+use DavidAnnebicque\TableBundle\Column\DateColumnType;
+use DavidAnnebicque\TableBundle\Column\DetailsHandleColumnType;
+use DavidAnnebicque\TableBundle\Column\EntityColumnType;
+use DavidAnnebicque\TableBundle\Column\LinkColumnType;
+use DavidAnnebicque\TableBundle\Column\ManyColumnType;
+use DavidAnnebicque\TableBundle\Column\PropertyColumnType;
+use DavidAnnebicque\TableBundle\Column\SelectColumnType;
+use DavidAnnebicque\TableBundle\Column\WidgetColumnType;
+use DavidAnnebicque\TableBundle\TableRegistry;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $configurator): void {
