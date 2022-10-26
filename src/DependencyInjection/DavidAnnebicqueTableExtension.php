@@ -19,14 +19,14 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class DATableExtension extends Extension
+class DavidAnnebicqueTableExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
 
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.php');
 
         $container->registerForAutoconfiguration(TableAdapter::class)->addTag(TableRegistry::TAG_ADAPTER);
@@ -37,7 +37,7 @@ class DATableExtension extends Extension
     public function prepend(ContainerBuilder $container)
     {
         $twigConfig = [];
-        $twigConfig['paths'][__DIR__.'/../Resources/views'] = 'da_table';
+        $twigConfig['paths'][__DIR__ . '/../Resources/views'] = 'da_table';
         $twigConfig['paths'][__DIR__.'/../Resources/public'] = 'da_table.public';
         $container->prependExtensionConfig('twig', $twigConfig);
     }

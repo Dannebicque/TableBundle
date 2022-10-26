@@ -31,7 +31,7 @@ class TableType
             ->setAllowedTypes('page_length', 'int')
             ->setDefault('orderable', true)
             ->setAllowedTypes('orderable', 'bool')
-            ->setDefault('template', '@DATable/table.html.twig')
+            ->setDefault('template', '@DavidAnnebicqueTable/table.html.twig')
             ->setAllowedTypes('template', 'string');
 
         $resolver
@@ -51,7 +51,7 @@ class TableType
                 'method' => 'GET',
             ])
             ->setAllowedTypes('toolbar_form_options', 'array')
-            ->setDefault('toolbar_template', '@DATable/filters.html.twig')
+            ->setDefault('toolbar_template', '@DavidAnnebicqueTable/filters.html.twig')
             ->setAllowedTypes('toolbar_template', 'string')
             ->setDefault('toolbar_form_data', null);
     }

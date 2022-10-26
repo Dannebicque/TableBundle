@@ -10,12 +10,12 @@
 namespace DavidAnnebicque\TableBundle;
 
 use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\TableCompilerPass;
-use DavidAnnebicque\TableBundle\DependencyInjection\DATableExtension;
+use DavidAnnebicque\TableBundle\DependencyInjection\DavidAnnebicqueTableExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DATableBundle extends Bundle
+class DavidAnnebicqueTableBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
@@ -25,9 +25,14 @@ class DATableBundle extends Bundle
     public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->extension) {
-            $this->extension = new DATableExtension();
+            $this->extension = new DavidAnnebicqueTableExtension();
         }
 
         return $this->extension;
+    }
+
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
     }
 }

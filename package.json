@@ -1,0 +1,25 @@
+{
+  "name": "tablebundle",
+  "version": "dev",
+  "main": "tableBundle.js",
+  "repository": "https://github.com/Dannebicque/TableBundle.git",
+  "author": "davidannebicque <david.annebicque@gmail.com>",
+  "license": "MPL2.0",
+  "scripts": {
+    "build": "encore production --progress",
+    "watch": "encore dev --watch",
+    "lint": "eslint Bundle/*/assets",
+    "lint-fix": "eslint Bundle/*/assets --fix"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "@symfony/webpack-encore": "^4.1.0",
+    "webpack": "^5.74.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "core-js": "^3.26.0"
+  }
+}
