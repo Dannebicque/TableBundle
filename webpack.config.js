@@ -2,18 +2,15 @@ var Encore = require('@symfony/webpack-encore');
 var path = require('path')
 
 Encore
-  .setOutputPath('./src/Resources/public/')
-  .setPublicPath('/bundles/davidannebicque/')
+  .setOutputPath('./public/')
+  .setPublicPath('/public/')
   .setManifestKeyPrefix('bundles/davidannebicque')
 
   .cleanupOutputBeforeBuild()
-  .enableSourceMaps(false)
+  .enableSourceMaps(true)
   .enableVersioning(true)
   .disableSingleRuntimeChunk()
 
-  .addAliases({
-    da_table: path.join(__dirname, '/assets/'),
-  })
   .addEntry('table', '/assets/tableBundle.js')
 
 

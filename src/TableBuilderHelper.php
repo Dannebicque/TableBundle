@@ -75,7 +75,7 @@ class TableBuilderHelper
     public function generateUrl(
         string $name,
         array $parameters = [],
-        int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
+        int $referenceType = UrlGeneratorInterface::ABSOLUTE_URL
     ): string {
         return $this->router->generate($name, $parameters, $referenceType);
     }

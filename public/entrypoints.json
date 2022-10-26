@@ -2,7 +2,7 @@
   "entrypoints": {
     "table": {
       "js": [
-        "/bundles/davidannebicque/table.6ea23430.js"
+        "/public/table.js"
       ]
     }
   }

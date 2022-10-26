@@ -1,0 +1,41 @@
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
+
+## Authors
+
+- [@davidannebicque](https://www.github.com/davidannebicque)
+
+Inspiré par https://github.com/acantepie/umbrella pour la gestion des tableaux, mais sans dépendance à DataTable.js
+
+
+## Documentation
+
+[Documentation](https://github.com/davidannebicque/TableBundle/docs)
+
+
+## License
+
+[MPL2.0](https://choosealicense.com/licenses/mpl-2.0/)
+
+
+## Installation
+
+Install my-project with composer
+
+```bash
+  composer require davidannebicque/table-bundle
+```
+
+add Javascript to your file template file
+
+```html
+    <script src="{{ asset('bundles/davidannebicquetable/table.js') }}" defer></script>
+```
+
+and use it ...
+
+
+
