@@ -9,7 +9,7 @@
 
 namespace DavidAnnebicque\TableBundle\DTO;
 
-use App\Components\Widget\DTO\Widget;
+use DavidAnnebicque\TableBundle\Widget\DTO\Widget;
 use Symfony\Component\Form\FormInterface;
 
 class Toolbar

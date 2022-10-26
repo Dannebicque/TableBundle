@@ -11,9 +11,9 @@ namespace DavidAnnebicque\TableBundle;
 
 use DavidAnnebicque\TableBundle\Column\ColumnType;
 use DavidAnnebicque\TableBundle\DTO\Column;
-use App\Components\Widget\Type\WidgetType;
-use App\Components\Widget\WidgetBuilder;
-use App\Components\Widget\WidgetFactory;
+use DavidAnnebicque\TableBundle\Widget\Type\WidgetType;
+use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use DavidAnnebicque\TableBundle\Widget\WidgetFactory;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -37,8 +37,6 @@ class DavidAnnebicqueTableExtension extends Extension
     public function prepend(ContainerBuilder $container)
     {
         $twigConfig = [];
-        $twigConfig['paths'][__DIR__ . '/../Resources/views'] = 'da_table';
-        $twigConfig['paths'][__DIR__.'/../Resources/public'] = 'da_table.public';
         $container->prependExtensionConfig('twig', $twigConfig);
     }
 

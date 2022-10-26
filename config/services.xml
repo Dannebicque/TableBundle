@@ -27,7 +27,7 @@
         </service>
         <service class="DavidAnnebicque\TableBundle\TableBuilderHelper" id="da_table.table_builder_helper" public="false">
             <argument type="service" id="da_table.table_registry"/>
-            <argument type="service" id="App\Components\Widget\WidgetFactory"/>
+            <argument type="service" id="da_table.widget_factory"/>
             <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
         </service>
@@ -39,5 +39,22 @@
         <service id="DavidAnnebicque\TableBundle\TableRenderer" alias="da_table.table_renderer" public="false"/>
         <service id="DavidAnnebicque\TableBundle\Twig\TableExtension" alias="da_table.twig.table_extension" public="false"/>
         <service id="DavidAnnebicque\TableBundle\Adapter\TableAdapter" alias="da_table.adapter" public="false"/>
+
+        <service class="DavidAnnebicque\TableBundle\Widget\WidgetRegistry" id="da_table.widget_registry" public="false"/>
+        <service class="DavidAnnebicque\TableBundle\Widget\WidgetFactory" id="da_table.widget_factory" public="false">
+            <argument type="service" id="da_table.widget_registry"/>
+        </service>
+        <service class="DavidAnnebicque\TableBundle\Widget\WidgetRenderer" id="da_table.widget_renderer" public="false">
+            <argument type="service" id="twig"/>
+        </service>
+        <service class="DavidAnnebicque\TableBundle\Widget\Twig\WidgetExtension" id="da_table.twig.widget_extension" public="false">
+            <argument type="service" id="da_table.widget_renderer"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="DavidAnnebicque\TableBundle\Widget\WidgetRegistry" alias="da_table.widget_registry" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\Widget\WidgetFactory" alias="da_table.widget_factory" public="false"/>
+        <service id="DavidAnnebicque\TableBundle\Widget\WidgetRenderer" alias="da_table.widget_renderer" public="false"/>
+
     </services>
 </container>

@@ -24,6 +24,7 @@
         "symfony/options-resolver": "^6.0",
         "symfony/property-access": "^6.0",
         "symfony/twig-bundle": "^6.0",
-        "symfony/webpack-encore-bundle": "^1.16"
+        "symfony/webpack-encore-bundle": "^1.16",
+        "symfony/form": "^6.1"
     }
 }

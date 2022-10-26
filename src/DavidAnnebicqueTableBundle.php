@@ -10,6 +10,7 @@
 namespace DavidAnnebicque\TableBundle;
 
 use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\TableCompilerPass;
+use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\WidgetCompilerPass;
 use DavidAnnebicque\TableBundle\DependencyInjection\DavidAnnebicqueTableExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
@@ -20,6 +21,8 @@ class DavidAnnebicqueTableBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new TableCompilerPass());
+        $container->addCompilerPass(new WidgetCompilerPass());
+
     }
 
     public function getContainerExtension(): ?ExtensionInterface

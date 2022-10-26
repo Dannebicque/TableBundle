@@ -9,8 +9,8 @@
 
 namespace DavidAnnebicque\TableBundle\Column;
 
-use App\Components\Widget\WidgetFactory;
-use App\Components\Widget\WidgetRenderer;
+use DavidAnnebicque\TableBundle\Widget\WidgetFactory;
+use DavidAnnebicque\TableBundle\Widget\WidgetRenderer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WidgetColumnType extends ColumnType
