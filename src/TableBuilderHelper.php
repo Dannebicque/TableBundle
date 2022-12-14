@@ -77,6 +77,12 @@ class TableBuilderHelper
         array $parameters = [],
         int $referenceType = UrlGeneratorInterface::ABSOLUTE_URL
     ): string {
-        return $this->router->generate($name, $parameters, $referenceType);
+        $url = $this->router->generate($name, $parameters, $referenceType);
+
+        if (str_starts_with($url, 'https')) {
+            return $url;
+        }
+
+        return str_replace('http', 'https', $url);
     }
 }
