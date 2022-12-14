@@ -56,7 +56,6 @@
 {%- endblock -%}
 
 {% block attributes -%}
-    {{ dump(attr) }}
     {%- for attrname, attrvalue in attr -%}
         {{ attrname }}-{{ attrvalue }}
         {{- " " -}}
