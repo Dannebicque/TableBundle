@@ -77,7 +77,7 @@ class WidgetType
 
         $resolver
             ->define('class')
-            ->default(null)
+            ->default('text-end')
             ->allowedTypes('string', 'null');
 
         $resolver

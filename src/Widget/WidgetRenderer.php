@@ -35,7 +35,6 @@ class WidgetRenderer
     public function render(WidgetView $view): string
     {
         $template = $this->load();
-
         $params = $view->vars;
         $params['widget'] = $view;
         $params['element'] = $view->element;

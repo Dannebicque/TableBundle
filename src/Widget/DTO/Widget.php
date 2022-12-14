@@ -29,6 +29,7 @@ class Widget
     {
         if (null === $this->view) {
             $this->view = new WidgetView();
+            $this->view->addClass('text-end');
 
             $this->view->vars['name'] = $this->name;
             $this->view->vars['block_name'] = $this->getBlockName($this->type->getBlockPrefix());

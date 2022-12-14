@@ -20,6 +20,6 @@ class RowEditLinkType extends RowLinkType
         $resolver
             ->setDefault('title', 'action.edit')
             ->setDefault('icon', $this->parameterBag->get('iconEdit'))
-            ->setDefault('class', 'btn btn-square btn-warning-outline  me-1');
+            ->setDefault('class', 'btn btn-square btn-warning-outline btn-sm me-1');
     }
 }

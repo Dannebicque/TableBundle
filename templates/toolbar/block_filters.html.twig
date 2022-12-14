@@ -1,5 +1,5 @@
 {%- block base_widget -%}
-    <{{ element }}{{ block('attributes') }}
+    <{{ element }} {{ block('attributes') }}
     {% if stimulus is defined %}
         {{ stimulus_controller(stimulus.controller, {
             modalUrl: stimulus.modalUrl,
@@ -56,7 +56,9 @@
 {%- endblock -%}
 
 {% block attributes -%}
+    {{ dump(attr) }}
     {%- for attrname, attrvalue in attr -%}
+        {{ attrname }}-{{ attrvalue }}
         {{- " " -}}
         {%- if attrname in ['title', 'data-confirm'] -%}
             {{- attrname }}="{{ translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans([], translation_domain) }}"
