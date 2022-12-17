@@ -24,7 +24,7 @@
 
 {%- block button_dropdown_widget -%}
     <div class="dropdown">
-        <button{{ block('attributes') }}>
+        <button {{ block('attributes') }}>
             {{- block('icon') }}&nbsp;
             {% if icon_only == false %}
             {{- block('text') }}
@@ -32,8 +32,9 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {%- for child in widget -%}
-                {{ child.addClass('dropdown-item') }}
+                {{ child.addClass('dropdown-item text-start') }}
                 {{ render_widget(child) }}
+                {# todo: textes alignés à droite avec le text-end de widget ajouté par défaut... #}
             {%- endfor -%}
         </div>
     </div>
@@ -57,8 +58,6 @@
 
 {% block attributes -%}
     {%- for attrname, attrvalue in attr -%}
-        {{ attrname }}-{{ attrvalue }}
-        {{- " " -}}
         {%- if attrname in ['title', 'data-confirm'] -%}
             {{- attrname }}="{{ translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans([], translation_domain) }}"
         {%- elseif attrvalue is same as(true) -%}

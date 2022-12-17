@@ -22,7 +22,6 @@ class WidgetType
     public function buildView(WidgetView $view, array $options): void
     {
         $view->vars['attr'] = $options['attr'];
-
         if ($options['class']) {
             if (isset($view->vars['attr']['class'])) {
                 $view->vars['attr']['class'] .= ' '.$options['class'];
@@ -40,8 +39,8 @@ class WidgetType
 
         if (!empty($options['title'])) {
             $view->vars['attr']['title'] = $options['title'];
-            $view->vars['attr']['data-bs-toggle'] = 'tooltip';
-            $view->vars['attr']['data-bs-trigger'] = 'hover';
+            $view->vars['attr']['data-controller'] = 'interface--tooltip';
+            $view->vars['attr']['data-tooltip-placement'] = $options['placement'];
         }
     }
 
@@ -76,8 +75,13 @@ class WidgetType
             ->allowedTypes('string', 'null');
 
         $resolver
+            ->define('placement')
+            ->default('bottom')
+            ->allowedTypes('string', 'null');
+
+        $resolver
             ->define('class')
-            ->default('text-end')
+            ->default('text-end')//todo: pas idéal, mais semble se perdre en route :D
             ->allowedTypes('string', 'null');
 
         $resolver

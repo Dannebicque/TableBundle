@@ -36,6 +36,13 @@ class WidgetView implements IteratorAggregate, Countable
         }
     }
 
+    public function removeClass(string $class): void
+    {
+        if (isset($this->vars['attr']['class'])) {
+            str_replace($class, '', $this->vars['attr']['class']);
+        }
+    }
+
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->children);
