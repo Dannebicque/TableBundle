@@ -39,8 +39,9 @@ class WidgetType
 
         if (!empty($options['title'])) {
             $view->vars['attr']['title'] = $options['title'];
-            $view->vars['attr']['data-controller'] = 'interface--tooltip';
-            $view->vars['attr']['data-tooltip-placement'] = $options['placement'];
+//            $view->vars['attr']['data-controller'] = 'interface--tooltip';
+//            $view->vars['attr']['data-tooltip-placement'] = $options['placement'];
+            //todo: a remettre car en conflit avec modal
         }
     }
 
