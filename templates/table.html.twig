@@ -11,6 +11,29 @@
         {{ fitlers_render(toolbar) }}
     {% endblock %}
 
+    {% block paging_haut %}
+        {% if paging == true %}
+            <div class="{{ paging_attr.id }}_bloc row">
+                <div class="col-3">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="{{ paging_attr.id }}_select_haut">Nb éléments par page</label>
+                        <select class="form-select" id="{{ paging_attr.id }}_select_haut">
+                            {% for length in paging_attr.lengthMenu %}
+                                <option value="{{ length }}" {% if length == paging_attr.pageLength %}selected="selected"{% endif %}>{{ length }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="{{ paging_attr.id }}_middle col-3"></div>
+                <div class="col-6">
+                    <nav class="{{ paging_attr.id }}_nav">
+
+                    </nav>
+                </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+
     {% block table %}
         <div class="table-responsive">
             <table {{ _self.attributes(table_attr) }}>
@@ -38,26 +61,27 @@
         </div>
     {% endblock %}
 
-    {% block paging %}
+    {% block paging_bas %}
         {% if paging == true %}
-            <div class="row" id="{{ paging_attr.id }}_bloc">
+            <div class="{{ paging_attr.id }}_bloc row">
                 <div class="col-3">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="{{ paging_attr.id }}_select">Nb éléments par page</label>
-                        <select class="form-select" id="{{ paging_attr.id }}_select">
+                        <label class="input-group-text" for="{{ paging_attr.id }}_select_bas">Nb éléments par page</label>
+                        <select class="form-select" id="{{ paging_attr.id }}_select_bas">
                             {% for length in paging_attr.lengthMenu %}
                                 <option value="{{ length }}" {% if length == paging_attr.pageLength %}selected="selected"{% endif %}>{{ length }}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
-                <div class="col-3" id="{{ paging_attr.id }}_middle"></div>
+                <div class="{{ paging_attr.id }}_middle col-3"></div>
                 <div class="col-6">
-                    <nav id="{{ paging_attr.id }}_nav">
+                    <nav class="{{ paging_attr.id }}_nav">
 
                     </nav>
                 </div>
             </div>
         {% endif %}
     {% endblock %}
+
 </my-table>

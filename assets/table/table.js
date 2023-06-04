@@ -95,8 +95,14 @@ export default class Table extends HTMLElement {
     })
 
     if (this.options.paging === true) {
-      const select = document.getElementById(`${this.options.paging_id}_select`)
-      select.addEventListener('change', (e) => {
+      const selectHaut = document.getElementById(`${this.options.paging_id}_select_haut`)
+      const selectBas = document.getElementById(`${this.options.paging_id}_select_bas`)
+      selectHaut.addEventListener('change', (e) => {
+        e.preventDefault()
+        this.nbElementPerPage = e.target.value
+        this._buildArray()
+      })
+      selectBas.addEventListener('change', (e) => {
         e.preventDefault()
         this.nbElementPerPage = e.target.value
         this._buildArray()
@@ -177,7 +183,7 @@ export default class Table extends HTMLElement {
   }
 
   _updatePagination(paging) {
-    const nav = document.getElementById(`${this.options.paging_id}_nav`)
+    const nav = document.querySelectorAll(`.${this.options.paging_id}_nav`)
     const previousDisabled = paging.firstPage === true ? 'disabled' : ''
     const nextDisabled = paging.lastPage === true ? 'disabled' : ''
     let pageCutLow = paging.numActivePage - 1
@@ -252,7 +258,10 @@ export default class Table extends HTMLElement {
                   </a>
               </li>
           </ul>`
-    nav.innerHTML = html
+
+    nav.forEach((element) => {
+        element.innerHTML = html
+    })
 
     this.div.querySelectorAll('.page-link').forEach((element) => {
       element.addEventListener('click', (e) => {
