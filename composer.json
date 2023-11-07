@@ -2,7 +2,8 @@
     "name": "davidannebicque/table-bundle",
     "description": "Bundle generant un tableau dynamique depuis Symfony",
     "type": "symfony-bundle",
-    "license": "MPL2.0",
+    "license": "MPL-2.0",
+    "homepage": "https://github.com/Dannebicque/TableBundle",
     "autoload": {
         "psr-4": {
             "DavidAnnebicque\\TableBundle\\": "src/"

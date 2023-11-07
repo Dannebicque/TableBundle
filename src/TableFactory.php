@@ -11,7 +11,7 @@ namespace DavidAnnebicque\TableBundle;
 
 use DavidAnnebicque\TableBundle\DTO\Table;
 
-class TableFactory
+class TableFactory implements TableInterface
 {
     /**
      * DataTableFactory constructor.

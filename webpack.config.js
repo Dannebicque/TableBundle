@@ -2,17 +2,19 @@ var Encore = require('@symfony/webpack-encore');
 var path = require('path')
 
 Encore
-  .setOutputPath('./public/')
-  .setPublicPath('/public/')
-  .setManifestKeyPrefix('bundles/davidannebicque')
+  // .setOutputPath('./public/')
+  // .setPublicPath('/public/')
+  // .setManifestKeyPrefix('bundles/davidannebicque')
+  .setOutputPath('./src/Resources/public/')
+  .setPublicPath('')
+  .setManifestKeyPrefix('')
 
   .cleanupOutputBeforeBuild()
   .enableSourceMaps(true)
   .enableVersioning(true)
   .disableSingleRuntimeChunk()
 
-  .addEntry('table', '/assets/tableBundle.js')
-
+  .addEntry('table', '/assets/js/tableBundle.js')
 
   .configureCssMinimizerPlugin((options) => {
     options.minimizerOptions = {

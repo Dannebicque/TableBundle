@@ -14,9 +14,10 @@ use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\WidgetCompilerPass;
 use DavidAnnebicque\TableBundle\DependencyInjection\DavidAnnebicqueTableExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DavidAnnebicqueTableBundle extends Bundle
+class DavidAnnebicqueTableBundle extends AbstractBundle
 {
     public function build(ContainerBuilder $container)
     {

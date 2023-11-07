@@ -9,7 +9,7 @@
 
 namespace DavidAnnebicque\TableBundle\Column;
 
-use App\Utils\HtmlUtils;
+use DavidAnnebicque\TableBundle\Utils\HtmlUtils;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

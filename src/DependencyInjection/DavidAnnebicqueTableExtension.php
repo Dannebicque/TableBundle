@@ -11,10 +11,13 @@ namespace DavidAnnebicque\TableBundle\DependencyInjection;
 
 use DavidAnnebicque\TableBundle\Adapter\TableAdapter;
 use DavidAnnebicque\TableBundle\Column\ColumnType;
+use DavidAnnebicque\TableBundle\TableInterface;
+use DavidAnnebicque\TableBundle\TableFactory;
 use DavidAnnebicque\TableBundle\TableRegistry;
 use DavidAnnebicque\TableBundle\TableType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -23,10 +26,18 @@ class DavidAnnebicqueTableExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
+        $container
+            ->setDefinition('table.builder', new Definition(TableFactory::class))
+            ->setPublic(false);
+
+        $container
+            ->setAlias(TableInterface::class, 'table.builder')
+            ->setPublic(false);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
 
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.php');
 
         $container->registerForAutoconfiguration(TableAdapter::class)->addTag(TableRegistry::TAG_ADAPTER);
