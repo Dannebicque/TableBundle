@@ -7,13 +7,13 @@
  * @lastUpdate 14/05/2022 11:04
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\Column\ColumnType;
-use DavidAnnebicque\TableBundle\DTO\Column;
-use DavidAnnebicque\TableBundle\Widget\Type\WidgetType;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
-use DavidAnnebicque\TableBundle\Widget\WidgetFactory;
+use Dannebicque\TableBundle\Column\ColumnType;
+use Dannebicque\TableBundle\DTO\Column;
+use Dannebicque\TableBundle\Widget\Type\WidgetType;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Widget\WidgetFactory;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;

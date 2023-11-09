@@ -7,10 +7,10 @@
  * @lastUpdate 28/08/2021 13:54
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\Type;
+namespace Dannebicque\TableBundle\Widget\Type;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\WidgetView;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Widget\DTO\WidgetView;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ButtonDropdownType extends WidgetType

@@ -7,10 +7,10 @@
  * @lastUpdate 14/05/2022 11:04
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\Adapter\TableAdapter;
-use DavidAnnebicque\TableBundle\Column\ColumnType;
+use Dannebicque\TableBundle\Adapter\TableAdapter;
+use Dannebicque\TableBundle\Column\ColumnType;
 use InvalidArgumentException;
 
 /**

@@ -7,10 +7,10 @@
  * @lastUpdate 29/08/2021 14:37
  */
 
-namespace DavidAnnebicque\TableBundle\Widget;
+namespace Dannebicque\TableBundle\Widget;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\Widget;
-use DavidAnnebicque\TableBundle\Widget\Type\WidgetType;
+use Dannebicque\TableBundle\Widget\DTO\Widget;
+use Dannebicque\TableBundle\Widget\Type\WidgetType;
 
 class WidgetFactory
 {

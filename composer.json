@@ -1,12 +1,12 @@
 {
-  "name": "davidannebicque/table-bundle",
+  "name": "dannebicque/table-bundle",
   "description": "Bundle generant un tableau dynamique depuis Symfony",
   "type": "symfony-bundle",
   "license": "MPL-2.0",
   "homepage": "https://github.com/Dannebicque/TableBundle",
   "autoload": {
     "psr-4": {
-      "DavidAnnebicque\\TableBundle\\": "src/"
+      "Dannebicque\\TableBundle\\": "src/"
     }
   },
   "keywords": [
@@ -30,6 +30,7 @@
     "symfony/twig-bundle": "^6.0",
     "symfony/webpack-encore-bundle": "^1.16",
     "symfony/form": "^6.1",
-    "symfony/stimulus-bundle": "^2.9"
+    "symfony/stimulus-bundle": "^2.9",
+    "symfony/orm-pack": "^2.4"
   }
 }

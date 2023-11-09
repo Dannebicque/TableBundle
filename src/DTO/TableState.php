@@ -7,7 +7,7 @@
  * @lastUpdate 09/10/2021 10:02
  */
 
-namespace DavidAnnebicque\TableBundle\DTO;
+namespace Dannebicque\TableBundle\DTO;
 
 use function in_array;
 

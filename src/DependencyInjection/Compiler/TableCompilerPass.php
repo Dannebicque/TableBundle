@@ -7,9 +7,9 @@
  * @lastUpdate 25/10/2022 14:39
  */
 
-namespace DavidAnnebicque\TableBundle\DependencyInjection\Compiler;
+namespace Dannebicque\TableBundle\DependencyInjection\Compiler;
 
-use DavidAnnebicque\TableBundle\TableRegistry;
+use Dannebicque\TableBundle\TableRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

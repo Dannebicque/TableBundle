@@ -6,14 +6,14 @@ A brief description of what this project does and who it's for
 
 ## Authors
 
-- [@davidannebicque](https://www.github.com/davidannebicque)
+- [@davidannebicque](https://www.github.com/Dannebicque)
 
 Inspiré par https://github.com/acantepie/umbrella pour la gestion des tableaux, mais sans dépendance à DataTable.js
 
 
 ## Documentation
 
-[Documentation](https://github.com/davidannebicque/TableBundle/docs)
+[Documentation](https://github.com/Dannebicque/TableBundle/docs)
 
 
 ## License
@@ -26,13 +26,13 @@ Inspiré par https://github.com/acantepie/umbrella pour la gestion des tableaux,
 Install my-project with composer
 
 ```bash
-  composer require davidannebicque/table-bundle
+  composer require Dannebicque/table-bundle
 ```
 
 add Javascript to your file template file
 
 ```html
-    <script src="{{ asset('bundles/davidannebicquetable/table.js') }}" defer></script>
+    <script src="{{ asset('bundles/dannebicquetable/table.js') }}" defer></script>
 ```
 
 and use it ...

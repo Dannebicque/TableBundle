@@ -7,9 +7,9 @@
  * @lastUpdate 21/10/2022 15:39
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\DTO\Table;
+use Dannebicque\TableBundle\DTO\Table;
 
 interface TableInterface
 {

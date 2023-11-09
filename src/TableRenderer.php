@@ -7,11 +7,11 @@
  * @lastUpdate 24/10/2022 15:20
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\DTO\Column;
-use DavidAnnebicque\TableBundle\DTO\Table;
-use DavidAnnebicque\TableBundle\DTO\Toolbar;
+use Dannebicque\TableBundle\DTO\Column;
+use Dannebicque\TableBundle\DTO\Table;
+use Dannebicque\TableBundle\DTO\Toolbar;
 use Twig\Environment;
 
 class TableRenderer

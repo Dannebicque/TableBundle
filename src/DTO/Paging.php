@@ -7,7 +7,7 @@
  * @lastUpdate 26/09/2021 18:48
  */
 
-namespace DavidAnnebicque\TableBundle\DTO;
+namespace Dannebicque\TableBundle\DTO;
 
 class Paging
 {

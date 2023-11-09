@@ -7,10 +7,10 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DavidAnnebicque\TableBundle\DTO;
+namespace Dannebicque\TableBundle\DTO;
 
-use DavidAnnebicque\TableBundle\Adapter\DoctrineAdapterInterface;
-use DavidAnnebicque\TableBundle\Adapter\TableAdapter;
+use Dannebicque\TableBundle\Adapter\DoctrineAdapterInterface;
+use Dannebicque\TableBundle\Adapter\TableAdapter;
 use Doctrine\ORM\QueryBuilder;
 use LogicException;
 use RuntimeException;
@@ -167,7 +167,7 @@ class Table
     // Adapter helper
 
     /**
-     * @throws \DavidAnnebicque\TableBundle\Adapter\AdapterException
+     * @throws \Dannebicque\TableBundle\Adapter\AdapterException
      */
     public function getAdapterResult(): TableResult
     {

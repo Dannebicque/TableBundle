@@ -7,10 +7,10 @@
  * @lastUpdate 28/08/2021 13:54
  */
 
-namespace DavidAnnebicque\TableBundle\Widget;
+namespace Dannebicque\TableBundle\Widget;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\Widget;
-use DavidAnnebicque\TableBundle\Widget\Type\WidgetType;
+use Dannebicque\TableBundle\Widget\DTO\Widget;
+use Dannebicque\TableBundle\Widget\Type\WidgetType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WidgetBuilder

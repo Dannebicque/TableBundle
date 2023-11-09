@@ -7,7 +7,7 @@
  * @lastUpdate 03/09/2021 19:17
  */
 
-namespace DavidAnnebicque\TableBundle\Column;
+namespace Dannebicque\TableBundle\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

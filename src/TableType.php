@@ -7,7 +7,7 @@
  * @lastUpdate 20/05/2022 07:40
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,7 +31,7 @@ class TableType
             ->setAllowedTypes('page_length', 'int')
             ->setDefault('orderable', true)
             ->setAllowedTypes('orderable', 'bool')
-            ->setDefault('template', '@DavidAnnebicqueTable/table.html.twig')
+            ->setDefault('template', '@DannebicqueTable/table.html.twig')
             ->setAllowedTypes('template', 'string');
 
         $resolver
@@ -51,7 +51,7 @@ class TableType
                 'method' => 'GET',
             ])
             ->setAllowedTypes('toolbar_form_options', 'array')
-            ->setDefault('toolbar_template', '@DavidAnnebicqueTable/filters.html.twig')
+            ->setDefault('toolbar_template', '@DannebicqueTable/filters.html.twig')
             ->setAllowedTypes('toolbar_template', 'string')
             ->setDefault('toolbar_form_data', null);
     }

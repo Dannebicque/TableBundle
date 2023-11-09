@@ -7,9 +7,9 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DavidAnnebicque\TableBundle\Widget;
+namespace Dannebicque\TableBundle\Widget;
 
-use DavidAnnebicque\TableBundle\Widget\Type\WidgetType;
+use Dannebicque\TableBundle\Widget\Type\WidgetType;
 use InvalidArgumentException;
 
 class WidgetRegistry

@@ -7,9 +7,9 @@
  * @lastUpdate 13/05/2022 15:10
  */
 
-namespace DavidAnnebicque\TableBundle\Column;
+namespace Dannebicque\TableBundle\Column;
 
-use DavidAnnebicque\TableBundle\Utils\HtmlUtils;
+use Dannebicque\TableBundle\Utils\HtmlUtils;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

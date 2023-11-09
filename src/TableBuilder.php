@@ -7,17 +7,17 @@
  * @lastUpdate 21/10/2022 15:39
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\Adapter\CallableAdapter;
-use DavidAnnebicque\TableBundle\Adapter\EntityAdapter;
-use DavidAnnebicque\TableBundle\Column\PropertyColumnType;
-use DavidAnnebicque\TableBundle\DTO\Paging;
-use DavidAnnebicque\TableBundle\DTO\Table;
-use DavidAnnebicque\TableBundle\DTO\Toolbar;
-use DavidAnnebicque\TableBundle\Utils\HtmlUtils;
-use DavidAnnebicque\TableBundle\Widget\Type\ButtonType;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Adapter\CallableAdapter;
+use Dannebicque\TableBundle\Adapter\EntityAdapter;
+use Dannebicque\TableBundle\Column\PropertyColumnType;
+use Dannebicque\TableBundle\DTO\Paging;
+use Dannebicque\TableBundle\DTO\Table;
+use Dannebicque\TableBundle\DTO\Toolbar;
+use Dannebicque\TableBundle\Utils\HtmlUtils;
+use Dannebicque\TableBundle\Widget\Type\ButtonType;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use InvalidArgumentException;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;

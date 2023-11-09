@@ -7,9 +7,9 @@
  * @lastUpdate 23/10/2021 10:37
  */
 
-namespace DavidAnnebicque\TableBundle\DTO;
+namespace Dannebicque\TableBundle\DTO;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\Widget;
+use Dannebicque\TableBundle\Widget\DTO\Widget;
 use Symfony\Component\Form\FormInterface;
 
 class Toolbar

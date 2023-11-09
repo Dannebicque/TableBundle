@@ -7,10 +7,10 @@
  * @lastUpdate 10/10/2021 12:36
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\Type;
+namespace Dannebicque\TableBundle\Widget\Type;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\WidgetView;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Widget\DTO\WidgetView;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

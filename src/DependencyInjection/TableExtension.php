@@ -7,14 +7,14 @@
  * @lastUpdate 25/10/2022 14:37
  */
 
-namespace DavidAnnebicque\TableBundle\DependencyInjection;
+namespace Dannebicque\TableBundle\DependencyInjection;
 
-use DavidAnnebicque\TableBundle\Adapter\TableAdapter;
-use DavidAnnebicque\TableBundle\Column\ColumnType;
-use DavidAnnebicque\TableBundle\TableInterface;
-use DavidAnnebicque\TableBundle\TableFactory;
-use DavidAnnebicque\TableBundle\TableRegistry;
-use DavidAnnebicque\TableBundle\TableType;
+use Dannebicque\TableBundle\Adapter\TableAdapter;
+use Dannebicque\TableBundle\Column\ColumnType;
+use Dannebicque\TableBundle\TableInterface;
+use Dannebicque\TableBundle\TableFactory;
+use Dannebicque\TableBundle\TableRegistry;
+use Dannebicque\TableBundle\TableType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class DavidAnnebicqueTableExtension extends Extension
+class TableExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {

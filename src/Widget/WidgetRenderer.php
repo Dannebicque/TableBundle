@@ -7,9 +7,9 @@
  * @lastUpdate 29/08/2021 14:37
  */
 
-namespace DavidAnnebicque\TableBundle\Widget;
+namespace Dannebicque\TableBundle\Widget;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\WidgetView;
+use Dannebicque\TableBundle\Widget\DTO\WidgetView;
 use Twig\Environment;
 use Twig\TemplateWrapper;
 
@@ -23,7 +23,7 @@ class WidgetRenderer
      */
     public function __construct(public Environment $twig)
     {
-        $this->template = '@DavidAnnebicqueTable/toolbar/block_filters.html.twig';
+        $this->template = '@DannebicqueTable/toolbar/block_filters.html.twig';
     }
 
     /**

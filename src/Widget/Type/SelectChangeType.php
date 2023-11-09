@@ -7,10 +7,10 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\Type;
+namespace Dannebicque\TableBundle\Widget\Type;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\WidgetView;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Widget\DTO\WidgetView;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use function is_callable;

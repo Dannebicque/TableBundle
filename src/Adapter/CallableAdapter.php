@@ -7,10 +7,10 @@
  * @lastUpdate 28/08/2021 14:07
  */
 
-namespace DavidAnnebicque\TableBundle\Adapter;
+namespace Dannebicque\TableBundle\Adapter;
 
-use DavidAnnebicque\TableBundle\DTO\TableResult;
-use DavidAnnebicque\TableBundle\DTO\TableState;
+use Dannebicque\TableBundle\DTO\TableResult;
+use Dannebicque\TableBundle\DTO\TableState;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CallableAdapter extends TableAdapter

@@ -7,9 +7,9 @@
  * @lastUpdate 29/08/2021 14:37
  */
 
-namespace DavidAnnebicque\TableBundle\DTO;
+namespace Dannebicque\TableBundle\DTO;
 
-use DavidAnnebicque\TableBundle\Column\ColumnType;
+use Dannebicque\TableBundle\Column\ColumnType;
 
 class Column
 {

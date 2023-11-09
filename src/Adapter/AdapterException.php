@@ -7,7 +7,7 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DavidAnnebicque\TableBundle\Adapter;
+namespace Dannebicque\TableBundle\Adapter;
 
 use Exception;
 

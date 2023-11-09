@@ -7,7 +7,7 @@
  * @lastUpdate 06/05/2022 18:18
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\DTO;
+namespace Dannebicque\TableBundle\Widget\DTO;
 
 use ArrayIterator;
 use Countable;

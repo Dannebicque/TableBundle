@@ -1,6 +1,6 @@
 <?php
 
-namespace DavidAnnebicque\TableBundle\Utils;
+namespace Dannebicque\TableBundle\Utils;
 
 abstract class HtmlUtils
 {

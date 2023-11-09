@@ -7,10 +7,10 @@
  * @lastUpdate 21/10/2022 12:10
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\Type;
+namespace Dannebicque\TableBundle\Widget\Type;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\WidgetView;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Widget\DTO\WidgetView;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use function array_filter;
 use function array_map;
 use function is_string;

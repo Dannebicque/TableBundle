@@ -7,9 +7,9 @@
  * @lastUpdate 14/05/2022 11:04
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\DTO\Table;
+use Dannebicque\TableBundle\DTO\Table;
 
 class TableFactory implements TableInterface
 {

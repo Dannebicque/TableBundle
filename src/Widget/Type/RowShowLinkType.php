@@ -7,7 +7,7 @@
  * @lastUpdate 23/10/2021 12:18
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\Type;
+namespace Dannebicque\TableBundle\Widget\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

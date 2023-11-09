@@ -7,17 +7,16 @@
  * @lastUpdate 25/10/2022 14:35
  */
 
-namespace DavidAnnebicque\TableBundle;
+namespace Dannebicque\TableBundle;
 
-use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\TableCompilerPass;
-use DavidAnnebicque\TableBundle\DependencyInjection\Compiler\WidgetCompilerPass;
-use DavidAnnebicque\TableBundle\DependencyInjection\DavidAnnebicqueTableExtension;
+use Dannebicque\TableBundle\DependencyInjection\Compiler\TableCompilerPass;
+use Dannebicque\TableBundle\DependencyInjection\Compiler\WidgetCompilerPass;
+use Dannebicque\TableBundle\DependencyInjection\TableExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DavidAnnebicqueTableBundle extends Bundle
+class DannebicqueTableBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
@@ -29,7 +28,7 @@ class DavidAnnebicqueTableBundle extends Bundle
     public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->extension) {
-            $this->extension = new DavidAnnebicqueTableExtension();
+            $this->extension = new TableExtension();
         }
 
         return $this->extension;

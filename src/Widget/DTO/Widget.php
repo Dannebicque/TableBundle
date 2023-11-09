@@ -7,9 +7,9 @@
  * @lastUpdate 08/10/2021 19:11
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\DTO;
+namespace Dannebicque\TableBundle\Widget\DTO;
 
-use DavidAnnebicque\TableBundle\Widget\Type\WidgetType;
+use Dannebicque\TableBundle\Widget\Type\WidgetType;
 use function str_ends_with;
 
 class Widget
@@ -19,7 +19,7 @@ class Widget
     /**
      * Widget constructor.
      *
-     * @param \DavidAnnebicque\TableBundle\Widget\DTO\Widget[] $children
+     * @param \Dannebicque\TableBundle\Widget\DTO\Widget[] $children
      */
     public function __construct(protected string $name, protected WidgetType $type, protected array $options, protected array $children = [])
     {

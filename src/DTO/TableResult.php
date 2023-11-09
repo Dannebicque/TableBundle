@@ -7,7 +7,7 @@
  * @lastUpdate 29/08/2021 12:33
  */
 
-namespace DavidAnnebicque\TableBundle\DTO;
+namespace Dannebicque\TableBundle\DTO;
 
 class TableResult
 {

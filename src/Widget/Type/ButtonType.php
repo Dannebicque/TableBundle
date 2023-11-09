@@ -7,10 +7,10 @@
  * @lastUpdate 29/08/2021 14:37
  */
 
-namespace DavidAnnebicque\TableBundle\Widget\Type;
+namespace Dannebicque\TableBundle\Widget\Type;
 
-use DavidAnnebicque\TableBundle\Widget\DTO\WidgetView;
-use DavidAnnebicque\TableBundle\Widget\WidgetBuilder;
+use Dannebicque\TableBundle\Widget\DTO\WidgetView;
+use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
