@@ -1,0 +1,23 @@
+{
+  "name": "@davidannebicque/table-bundle",
+  "version": "1.0.0",
+  "symfony": {
+    "controllers": {
+      "table": {
+        "main": "dist/controller.js",
+        "fetch": "eager",
+        "enabled": true,
+        "autoimport": {
+          "dist/bootstrap4-theme.css": false,
+          "dist/bootstrap5-theme.css": true
+        }
+      }
+    },
+    "importmap": {
+      "@hotwired/stimulus": "^3.0.0"
+    }
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  }
+}

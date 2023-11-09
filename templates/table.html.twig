@@ -5,7 +5,9 @@
     {%- endfor -%}
 {%- endmacro -%}
 
-<my-table {{ _self.attributes(attr) }}>
+<my-table {{ _self.attributes(attr) }}
+        {{ stimulus_controller('davidannebicque/table-bundle/table') }}
+>
 
     {% block toolbar %}
         {{ fitlers_render(toolbar) }}

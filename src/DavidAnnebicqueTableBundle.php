@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DavidAnnebicqueTableBundle extends AbstractBundle
+class DavidAnnebicqueTableBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
