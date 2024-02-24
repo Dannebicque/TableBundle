@@ -32,4 +32,4 @@ jobs:
               {"type":"test","section":"🧪 Tests","hidden":false},
               {"type":"docs","section":"📚 Documentation","hidden":false}
             ]
-            pull-request-header: ":robot: New release :rocket:"
+          pull-request-header: ":robot: New release :rocket:"
