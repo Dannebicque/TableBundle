@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class TableExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $container
             ->setDefinition('table.builder', new Definition(TableFactory::class))
@@ -45,7 +45,7 @@ class TableExtension extends Extension
         $container->registerForAutoconfiguration(ColumnType::class)->addTag(TableRegistry::TAG_COLUMN_TYPE);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $twigConfig = [];
         $container->prependExtensionConfig('twig', $twigConfig);

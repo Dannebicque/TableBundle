@@ -1,6 +1,6 @@
 {
   "name": "@dannebicque/tablebundle",
-  "version": null,
+  "version": "0.0.2",
   "main": "tableBundle.js",
   "repository": "https://github.com/Dannebicque/TableBundle.git",
   "author": "davidannebicque <david.annebicque@gmail.com>",

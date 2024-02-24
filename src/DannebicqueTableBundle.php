@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DannebicqueTableBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new TableCompilerPass());
         $container->addCompilerPass(new WidgetCompilerPass());

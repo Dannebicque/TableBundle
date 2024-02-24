@@ -19,9 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityAdapter extends TableAdapter implements DoctrineAdapterInterface
 {
-    /**
-     * EntityCollector constructor.
-     */
     public function __construct(protected EntityManagerInterface $em)
     {
     }
@@ -37,16 +34,6 @@ class EntityAdapter extends TableAdapter implements DoctrineAdapterInterface
             ->setAllowedTypes('query_alias', 'string')
             ->setDefault('query', null)
             ->setAllowedTypes('query', ['callable', 'null'])
-            /*
-             * Paginator / query options (use for optimization)
-             *
-             * To fetch large data (~over 1m) use options :
-             *  [
-             *      'fetch_join_collection' => false,
-             *      'use_output_walker' => false,
-             *      'use_distinct_hint' => false
-             * ]
-             */
             ->setDefault('fetch_join_collection', true)
             ->setAllowedTypes('fetch_join_collection', 'bool')
             ->setDefault('use_output_walker', null)

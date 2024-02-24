@@ -1,16 +1,12 @@
 {
   "name": "@dannebicque/table-bundle",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "symfony": {
     "controllers": {
       "table": {
         "main": "dist/controller.js",
         "fetch": "eager",
-        "enabled": true,
-        "autoimport": {
-          "dist/bootstrap4-theme.css": false,
-          "dist/bootstrap5-theme.css": true
-        }
+        "enabled": true
       }
     },
     "importmap": {
