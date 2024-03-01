@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+
+## Changelog
+
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ##  (2023-06-04)
@@ -18,7 +22,7 @@ All notable changes to this project will be documented in this file. See [standa
 * [https] patch pour garantir le https ([f2781ee](https://github.com/Dannebicque/TableBundle/commit/f2781eed24885c3369187c4e25203137976c076f))
 * [Style] : Alignement, css, mise en page ([60cac30](https://github.com/Dannebicque/TableBundle/commit/60cac308a7bd14a6ff872eb0a7de280947252a62))
 
-# Changelog
+## Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
