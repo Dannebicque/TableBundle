@@ -21,6 +21,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "core-js": "^3.26.0"
+    "core-js": "^3.26.0",
+    "@symfony/stimulus-bridge": "^3.0"
   }
 }
