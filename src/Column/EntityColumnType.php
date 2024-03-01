@@ -33,6 +33,10 @@ class EntityColumnType extends ColumnType
     {
         $obj = $this->accessor->getValue($rowData, $options['property_path']); // on récupère l'objet de la liaison
 
+        if ($obj === null) {
+            return '';
+        }
+
         return $this->renderProperty($this->accessor->getValue($obj, $options['display_field']), $options);
     }
 
