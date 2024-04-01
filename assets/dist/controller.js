@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import Table from '../js/table/table'
 
 /*
  * This is an example Stimulus controller!
@@ -11,6 +12,6 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
   connect() {
-    console.log('Hello Stimulus! Table Bundle---')
+    customElements.define('my-table', Table)
   }
 }
