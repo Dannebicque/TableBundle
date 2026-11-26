@@ -15,6 +15,7 @@ use Doctrine\ORM\QueryBuilder;
 use LogicException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class Table
 {
@@ -89,44 +90,60 @@ class Table
         return $this->state;
     }
 
-    /**
-     * @throws \JsonException
-     */
     public function handleRequest(Request $httpRequest): self
     {
         $this->response = null;
-        $isCallback = $httpRequest->isMethod('POST');
+        $this->state = new TableState($this);
 
-        if ($isCallback) {
-            $parametersAsArray = [];
-            if ($content = $httpRequest->getContent()) {
-                $parametersAsArray = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
-            }
-            $this->state = new TableState($this);
-            if (array_key_exists('paging', $parametersAsArray)) {
-                $this->paging->handleRequest($parametersAsArray['paging']);
-            }
-
-            if (array_key_exists('filter', $parametersAsArray)) {
-                $this->toolbar->handleRequest($parametersAsArray['filter']);
-            }
-
-            $this->state->setPaging($this->paging->getData());
-            $this->state->setFormData($this->toolbar->getFormData());
-            $this->state->applyParameters($parametersAsArray);
+        // Seul un POST JSON est un appel du tableau : les autres formulaires de la page sont ignorés.
+        if (!$httpRequest->isMethod('POST') || 'json' !== $httpRequest->getContentTypeFormat()) {
+            return $this;
         }
+
+        try {
+            $parameters = json_decode($httpRequest->getContent() ?: '[]', true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new BadRequestHttpException('Invalid JSON body.', $e);
+        }
+
+        if (!\is_array($parameters)) {
+            throw new BadRequestHttpException('Invalid JSON body.');
+        }
+
+        if (\is_array($parameters['paging'] ?? null)) {
+            $this->paging->handleRequest($parameters['paging']);
+        }
+
+        if (\is_array($parameters['filter'] ?? null)) {
+            $this->toolbar->handleRequest($parameters['filter']);
+        }
+
+        $this->state->setPaging($this->paging->getData());
+        $this->state->setFormData($this->toolbar->getFormData());
+        $this->state->applyParameters($parameters);
 
         return $this;
     }
 
+    /**
+     * @deprecated since 2.0, use handleParameters()
+     */
     public function handleParamaters(array $parameters): self
+    {
+        trigger_deprecation('dannebicque/table-bundle', '2.0', 'The "%s()" method is deprecated, use "handleParameters()" instead.', __METHOD__);
+
+        return $this->handleParameters($parameters);
+    }
+
+    public function handleParameters(array $parameters): self
     {
         $this->response = null;
 
         $this->state = new TableState($this);
-        $this->state->applyParameters($parameters);
         $this->toolbar->submitData($parameters);
+        $this->state->setPaging($this->paging->getData());
         $this->state->setFormData($this->toolbar->getFormData());
+        $this->state->applyParameters($parameters);
 
         return $this;
     }
@@ -156,7 +173,7 @@ class Table
 
         $this->paging->setResult($result);
 
-        return TableResponse::createSuccess($rowViews, $this->paging->getData());
+        return $this->response = TableResponse::createSuccess($rowViews, $this->paging->getData());
     }
 
     public function isCallback(): bool

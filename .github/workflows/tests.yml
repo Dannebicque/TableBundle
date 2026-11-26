@@ -1,0 +1,25 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { php: '8.2', symfony: '7.4.*' }
+          - { php: '8.5', symfony: '7.4.*' }
+          - { php: '8.4', symfony: '8.0.*' }
+          - { php: '8.5', symfony: '8.1.*' }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: flex
+      - run: composer update --no-interaction --no-progress
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+      - run: vendor/bin/phpunit

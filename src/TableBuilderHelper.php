@@ -51,8 +51,7 @@ class TableBuilderHelper
         $resolver = new OptionsResolver();
 
         $resolver
-            ->setDefault('id', $name)
-            ->setDefault('is_safe_html', true);
+            ->setDefault('id', $name);
 
         $columnType->configureOptions($resolver);
         $columnResolvedOptions = $resolver->resolve($options);
@@ -75,14 +74,8 @@ class TableBuilderHelper
     public function generateUrl(
         string $name,
         array $parameters = [],
-        int $referenceType = UrlGeneratorInterface::ABSOLUTE_URL
+        int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
     ): string {
-        $url = $this->router->generate($name, $parameters, $referenceType);
-
-        if (str_starts_with($url, 'https')) {
-            return $url;
-        }
-
-        return str_replace('http', 'https', $url);
+        return $this->router->generate($name, $parameters, $referenceType);
     }
 }

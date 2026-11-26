@@ -9,6 +9,8 @@
 
 namespace Dannebicque\TableBundle\Column;
 
+use Dannebicque\TableBundle\Utils\HtmlUtils;
+
 use InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -55,7 +57,7 @@ class ManyColumnType extends ColumnType
             ? $this->accessor->getValue($one, $options['one_path'])
             : $one;
 
-        return '<span class="badge bg-secondary mb-1 mt-1">'.$value.'</span>';
+        return '<span class="badge bg-secondary mb-1 mt-1">'.HtmlUtils::escape($value).'</span>';
     }
 
     public function configureOptions(OptionsResolver $resolver): void

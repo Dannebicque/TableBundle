@@ -17,20 +17,26 @@ class Paging
     private int $recordsFiltered = 0;
     private int $nbPages = 0;
 
+    /** @var int[] tailles de page acceptées depuis le navigateur */
+    private array $allowedLengths;
+
     public function __construct(array $options = [])
     {
-        $this->pageLength = $options['page_length'];
-        $this->pageActive = $options['page_active'];
+        $this->pageLength = max(1, $options['page_length']);
+        $this->pageActive = max(1, $options['page_active']);
+        $this->allowedLengths = [$this->pageLength, ...array_map('intval', $options['length_menu'] ?? [])];
     }
 
     public function handleRequest(array $paging): void
     {
-        if (array_key_exists('pageLength', $paging)) {
-            $this->pageLength = is_int((int) $paging['pageLength']) ? (int) $paging['pageLength'] : 30;
+        $length = filter_var($paging['pageLength'] ?? null, FILTER_VALIDATE_INT);
+        if (false !== $length && \in_array($length, $this->allowedLengths, true)) {
+            $this->pageLength = $length;
         }
 
-        if (array_key_exists('pageActive', $paging)) {
-            $this->pageActive = is_int((int) $paging['pageActive']) ? (int) $paging['pageActive'] : 1;
+        $page = filter_var($paging['pageActive'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 1_000_000_000]]);
+        if (false !== $page) {
+            $this->pageActive = $page;
         }
     }
 
@@ -42,7 +48,7 @@ class Paging
             'recordsTotal' => $this->recordsTotal,
             'recordsFiltered' => $this->recordsFiltered,
             'firstPage' => 1 === $this->pageActive,
-            'lastPage' => $this->pageActive === $this->nbPages,
+            'lastPage' => $this->pageActive >= $this->nbPages,
             'nbPages' => $this->nbPages,
             'start' => $this->getStart(),
         ];
@@ -57,6 +63,6 @@ class Paging
     {
         $this->recordsFiltered = $tableResult->getNbResults();
         $this->recordsTotal = $tableResult->getCount();
-        $this->nbPages = (int) ceil($this->recordsTotal / $this->pageLength);
+        $this->nbPages = (int) ceil($this->recordsFiltered / $this->pageLength);
     }
 }

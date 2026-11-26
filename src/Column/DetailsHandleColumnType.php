@@ -9,6 +9,8 @@
 
 namespace Dannebicque\TableBundle\Column;
 
+use Dannebicque\TableBundle\Utils\HtmlUtils;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DetailsHandleColumnType extends ColumnType
@@ -26,9 +28,9 @@ class DetailsHandleColumnType extends ColumnType
             : $options['expanded'];
 
         return sprintf(
-            '<a href data-tag="details" data-init-state="%s" data-row-details="%s" class="row-details-handle"><i class="fas"></i></a>',
+            '<a href="#" aria-expanded="false" data-tag="details" data-init-state="%s" data-row-details="%s" class="row-details-handle">▸</a>',
             $expanded ? 'expanded' : 'collapsed',
-            $details
+            HtmlUtils::escape($details)
         );
     }
 

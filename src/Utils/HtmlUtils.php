@@ -18,11 +18,16 @@ abstract class HtmlUtils
         return ucfirst(strtolower(trim(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $text))));
     }
 
+    public static function escape(mixed $value): string
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+
     public static function to_attr(array $attributes): string
     {
         $html = '';
         foreach ($attributes as $key => $value) {
-            $html .= sprintf('%s="%s" ', $key, htmlspecialchars($value));
+            $html .= sprintf('%s="%s" ', $key, htmlspecialchars((string) $value));
         }
 
         return $html;

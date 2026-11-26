@@ -34,13 +34,14 @@ class TableState
     {
         $this->isCallback = true;
 
-        $this->start = $this->getStart();
-        $this->length = $this->getLength();
-
-        if (isset($parameters['order'])) {
+        if (isset($parameters['order']) && \is_array($parameters['order'])) {
             foreach ($parameters['order'] as $orderData) {
+                if (!\is_array($orderData) || !isset($orderData['order']) || !\is_string($orderData['column'] ?? null)) {
+                    continue;
+                }
+
                 // invalid dir
-                if (!in_array($orderData['order'], [Table::SORT_ASCENDING, Table::SORT_DESCENDING])) {
+                if (!in_array($orderData['order'], [Table::SORT_ASCENDING, Table::SORT_DESCENDING], true)) {
                     continue;
                 }
 
@@ -62,12 +63,12 @@ class TableState
 
     public function getStart(): int
     {
-        return $this->paging['start'];
+        return $this->paging['start'] ?? $this->start;
     }
 
     public function getLength(): int
     {
-        return $this->paging['pageLength'];
+        return $this->paging['pageLength'] ?? $this->length;
     }
 
     public function addOrderBy(Column $column, string $direction): self

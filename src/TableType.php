@@ -43,13 +43,7 @@ class TableType
         $resolver
             ->setDefault('toolbar_form_name', fn (Options $options) => sprintf('%s_tbf', $options['id']))
             ->setAllowedTypes('toolbar_form_name', 'string')
-            ->setDefault('toolbar_form_options', [
-                'validation_groups' => false,
-                'csrf_protection' => false,
-                'label' => false,
-                'required' => false,
-                'method' => 'GET',
-            ])
+            ->setDefault('toolbar_form_options', [])
             ->setAllowedTypes('toolbar_form_options', 'array')
             ->setDefault('toolbar_template', '@DannebicqueTable/filters.html.twig')
             ->setAllowedTypes('toolbar_template', 'string')

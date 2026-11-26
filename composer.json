@@ -20,17 +20,37 @@
   ],
   "require": {
     "php": ">=8.2",
-    "symfony/config": "6.4.*|7.*|8.*",
-    "symfony/routing": "6.4.*|7.*|8.*",
-    "symfony/dependency-injection": "6.4.*|7.*|8.*",
-    "symfony/http-foundation": "6.4.*|7.*|8.*",
-    "symfony/http-kernel": "6.4.*|7.*|8.*",
-    "symfony/options-resolver": "6.4.*|7.*|8.*",
-    "symfony/property-access": "6.4.*|7.*|8.*",
-    "symfony/twig-bundle": "6.4.*|7.*|8.*",
-    "symfony/webpack-encore-bundle": "^2.0",
-    "symfony/form": "6.4.*|7.*|8.*",
-    "symfony/stimulus-bundle": "^2.9",
-    "symfony/orm-pack": "^2.4"
+    "symfony/config": "^7.4 || ^8.0",
+    "symfony/dependency-injection": "^7.4 || ^8.0",
+    "symfony/deprecation-contracts": "^3.5",
+    "symfony/form": "^7.4 || ^8.0",
+    "symfony/framework-bundle": "^7.4 || ^8.0",
+    "symfony/http-foundation": "^7.4 || ^8.0",
+    "symfony/http-kernel": "^7.4 || ^8.0",
+    "symfony/options-resolver": "^7.4 || ^8.0",
+    "symfony/property-access": "^7.4 || ^8.0",
+    "symfony/routing": "^7.4 || ^8.0",
+    "symfony/stimulus-bundle": "^2.31 || ^3.0",
+    "symfony/translation": "^7.4 || ^8.0",
+    "symfony/twig-bridge": "^7.4 || ^8.0",
+    "symfony/twig-bundle": "^7.4 || ^8.0",
+    "twig/twig": "^3.15"
+  },
+  "require-dev": {
+    "doctrine/doctrine-bundle": "^2.13 || ^3.0",
+    "doctrine/orm": "^3.3",
+    "phpunit/phpunit": "^11.5 || ^12.0",
+    "symfony/asset-mapper": "^7.4 || ^8.0",
+    "symfony/security-csrf": "^7.4 || ^8.0",
+    "symfony/validator": "^7.4 || ^8.0"
+  },
+  "suggest": {
+    "doctrine/orm": "Required by EntityAdapter, SelectColumnType and SelectChangeType",
+    "doctrine/doctrine-bundle": "Required together with doctrine/orm"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Dannebicque\\TableBundle\\Tests\\": "tests/"
+    }
   }
 }

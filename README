@@ -1,41 +1,149 @@
+# TableBundle
 
-# Project Title
+Tableaux dynamiques (tri, filtres, pagination) pour Symfony 7.4 et 8.x. PHP >= 8.2 (8.4 pour Symfony 8).
 
-A brief description of what this project does and who it's for
-
-
-## Authors
-
-- [@davidannebicque](https://www.github.com/Dannebicque)
-
-Inspiré par https://github.com/acantepie/umbrella pour la gestion des tableaux, mais sans dépendance à DataTable.js
-
-
-## Documentation
-
-[Documentation](https://github.com/Dannebicque/TableBundle/docs)
-
-
-## License
-
-[MPL2.0](https://choosealicense.com/licenses/mpl-2.0/)
-
+Inspiré par https://github.com/acantepie/umbrella, sans dépendance à DataTables.js.
 
 ## Installation
 
-Install my-project with composer
-
 ```bash
-  composer require Dannebicque/table-bundle
+composer require dannebicque/table-bundle
 ```
 
-add Javascript to your file template file
+Sans Flex, ajouter `Dannebicque\TableBundle\DannebicqueTableBundle::class => ['all' => true]` dans `config/bundles.php`.
 
-```html
-    <script src="{{ asset('bundles/dannebicquetable/table.js') }}" defer></script>
+Le JavaScript est un contrôleur Stimulus (AssetMapper ou Webpack Encore avec StimulusBundle).
+Vérifier dans `assets/controllers.json` :
+
+```json
+"@dannebicque/table-bundle": {
+    "table": { "enabled": true, "fetch": "eager" },
+    "modal": { "enabled": true, "fetch": "eager" }
+}
 ```
 
-and use it ...
+La mise en forme suppose Bootstrap 5 et Font Awesome.
 
+## Utilisation
 
+```php
+class UserTableType extends TableType
+{
+    public function buildTable(TableBuilder $builder, array $options): void
+    {
+        $builder
+            ->addFilter('search', TextType::class)
+            ->addColumn('name', PropertyColumnType::class, ['order' => 'ASC'])
+            ->useAdapter(EntityAdapter::class, [
+                'class' => User::class,
+                'query' => function (QueryBuilder $qb, array $filters) {
+                    if (isset($filters['search'])) {
+                        $qb->andWhere('e.name LIKE :s')->setParameter('s', '%'.$filters['search'].'%');
+                    }
+                },
+            ]);
+    }
+}
+```
 
+```php
+#[Route('/users', name: 'users', methods: ['GET', 'POST'])]
+public function index(Request $request, TableInterface $factory): Response
+{
+    $table = $factory->createBuilder(UserTableType::class)->setLoadUrl('users')->getTable();
+    $table->handleRequest($request);
+
+    if ($table->isCallback()) {
+        return $table->getCallbackResponse();
+    }
+
+    return $this->render('users.html.twig', ['table' => $table]);
+}
+```
+
+```twig
+{{ table_render(table) }}
+```
+
+## Configuration
+
+```yaml
+da_table:
+    icons: { delete: 'fas fa-trash', edit: 'fas fa-edit', show: 'fas fa-eye', duplicate: 'fas fa-copy' }
+```
+
+## Sécurité
+
+Les valeurs des colonnes sont échappées. Une colonne personnalisée qui produit du HTML doit définir
+`is_safe_html` à `true` (ou utiliser `render_html`) et échapper elle-même ses données.
+L'accès à la route du tableau reste à protéger par l'application.
+
+## Actions
+
+Les options `confirm`, `xhr`, `method`, `csrf_token_id` et `spinner` des liens et boutons sont gérées par le
+contrôleur `table`. Après une action XHR réussie le tableau se recharge ; une réponse JSON `{"redirect": "/url"}`
+redirige.
+
+`RowDeleteLinkType` demande confirmation puis envoie un `DELETE` avec un jeton CSRF (si la protection CSRF est
+activée), dans l'en-tête `X-CSRF-TOKEN` et le champ `_token` :
+
+```php
+#[Route('/users/{id}', name: 'user_delete', methods: ['DELETE'])]
+public function delete(User $user, Request $request, EntityManagerInterface $em): Response
+{
+    if (!$this->isCsrfTokenValid('delete', $request->headers->get('X-CSRF-TOKEN'))) {
+        throw $this->createAccessDeniedException();
+    }
+    $em->remove($user);
+    $em->flush();
+
+    return new Response(status: Response::HTTP_NO_CONTENT);
+}
+```
+
+### Modale
+
+`RowModalLinkType` et `StimulusButtonModalType` chargent une page partielle dans un `<dialog>`. Un formulaire qu'elle
+contient est envoyé en arrière-plan : réponse 422 = formulaire réaffiché, réponse 2xx ou redirection = fermeture et
+rechargement du tableau. Les balises `<script>` du contenu ne sont pas exécutées.
+
+### Mise à jour en direct
+
+`SelectColumnType` : `live_update => true`, `live_update_path` (nom de route), `live_update_route_params` et
+`live_update_params` (tableau ou fonction recevant la ligne). La route reçoit un `POST` JSON contenant ces
+paramètres et `value`, avec un jeton CSRF `live_update`. `SelectChangeType` utilise `route`, `route_params`,
+`post_params` de la même manière.
+
+### Événements JavaScript
+
+`dannebicque-table:success`, `dannebicque-table:error` et `dannebicque-table:selection` (cases cochées, dans
+`event.detail.values`). Appeler `preventDefault()` sur `success` évite le rechargement.
+Émettre `dannebicque-table:reload` sur l'élément `<my-table>` recharge le tableau.
+
+## Traductions
+
+Les textes du bundle sont dans le domaine `da_table` (français et anglais) et peuvent être surchargés dans
+`translations/da_table.<langue>.yaml`.
+
+## Mise à niveau depuis 1.x
+
+- Symfony 6.4 à 7.3 ne sont plus pris en charge.
+- `is_safe_html` vaut désormais `false` par défaut.
+- Les filtres reçus sont ceux du formulaire (valeurs transformées : entités, dates…), les champs vides sont omis.
+- Les paramètres `iconDelete`, `iconEdit`… sont remplacés par `da_table.icons`.
+- `setLoadUrl()` génère un chemin et ne force plus `https` (configurer `trusted_proxies` si besoin).
+- Les `<th>` portent `data-column` au lieu de `id` (templates personnalisés à adapter).
+- Le script autonome `bundles/dannebicquetable/table.js` est supprimé au profit du contrôleur Stimulus.
+- `EntityColumnType` n'est plus triable par défaut.
+- `RowDeleteLinkType` envoie un `DELETE` en XHR après confirmation (la route doit l'accepter).
+- Le contrôleur de modale par défaut est celui du bundle (option `stimulus-controller` pour garder le vôtre).
+- Les titres des actions sont traduits dans le domaine `da_table`.
+- `fitlers_render` et `handleParamaters()` sont dépréciés : `filters_render` et `handleParameters()`.
+
+## Licence
+
+MPL-2.0
+
+## Mise à jour
+
+Depuis une version 1.x : suivre [UPGRADE-2.0.md](UPGRADE-2.0.md).

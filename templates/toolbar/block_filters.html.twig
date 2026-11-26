@@ -6,12 +6,12 @@
             size: stimulus.size,
             modalTitle: stimulus.title,
         }) }}
-        data-action="{{ stimulus.controller }}#{{ stimulus.action }}"
+        {{ stimulus_action(stimulus.controller, stimulus.action) }}
     {% endif %}
     >
     {{- block('icon') }}
     {%- if name != 'widget' -%}
-        {% if icon_only == false %}
+        {% if not icon_only %}
             {{- block('text') }}
         {% endif %}
     {%- endif -%}
@@ -26,7 +26,7 @@
     <div class="dropdown">
         <button {{ block('attributes') }}>
             {{- block('icon') }}&nbsp;
-            {% if icon_only == false %}
+            {% if not icon_only %}
             {{- block('text') }}
             {% endif %}
         </button>
@@ -41,29 +41,30 @@
 {%- endblock -%}
 
 {%- block select_change_widget -%}
-    {% if choices != false %}
-        todo à ajouter
-        {# todo à ajouter #}
-    {% else %}
-        <select {{ block('attributes') }}>
-            {% if attr.required == false %}
-                <option value="" selected>Choisir</option>
-            {% endif %}
-            {% for key, data in datas %}
-                <option value="{{ key }}" {% if key == value %}selected{% endif %}>{{ data }}</option>
+    <select {{ block('attributes') }}>
+        {% if not attr.required|default(false) %}
+            <option value="">{{ 'select.choose'|trans({}, 'da_table') }}</option>
+        {% endif %}
+        {% if choices %}
+            {% for label, key in choices %}
+                <option value="{{ key }}" {% if key == value %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
-        </select>
-    {% endif %}
+        {% else %}
+            {% for key, label in datas %}
+                <option value="{{ key }}" {% if key == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        {% endif %}
+    </select>
 {%- endblock -%}
 
 {% block attributes -%}
     {%- for attrname, attrvalue in attr -%}
         {%- if attrname in ['title', 'data-confirm'] -%}
-            {{- attrname }}="{{ translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans([], translation_domain) }}"
+            {{- " " ~ attrname }}="{{ translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans([], translation_domain) }}"
         {%- elseif attrvalue is same as(true) -%}
-            {{- attrname }}="{{ attrname }}"
+            {{- " " ~ attrname }}="{{ attrname }}"
         {%- elseif attrvalue is not same as(false) -%}
-            {{- attrname }}="{{ attrvalue }}"
+            {{- " " ~ attrname }}="{{ attrvalue }}"
         {%- endif -%}
     {%- endfor -%}
 {%- endblock attributes -%}

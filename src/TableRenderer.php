@@ -12,6 +12,7 @@ namespace Dannebicque\TableBundle;
 use Dannebicque\TableBundle\DTO\Column;
 use Dannebicque\TableBundle\DTO\Table;
 use Dannebicque\TableBundle\DTO\Toolbar;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class TableRenderer
@@ -19,7 +20,7 @@ class TableRenderer
     /**
      * DataTableRenderer constructor.
      */
-    public function __construct(protected Environment $twig)
+    public function __construct(protected Environment $twig, protected TranslatorInterface $translator)
     {
     }
 
@@ -54,6 +55,8 @@ class TableRenderer
         $vars['attr'] = [
             'id' => $options['id'],
             'class' => 'datable-container',
+            'data-close-label' => $this->trans('modal.close'),
+            'data-error-label' => $this->trans('table.load_error'),
             'data-options' => json_encode($this->getJsOptions($dataTable), JSON_THROW_ON_ERROR),
         ];
 
@@ -65,13 +68,13 @@ class TableRenderer
 
         $vars['paging'] = $options['paging'];
         $vars['paging_attr'] = [
-            'id' => 'id_paging',
+            'id' => $options['id'].'_paging',
             'lengthChange' => $options['length_change'],
             'pageLength' => $options['page_length'],
             'lengthMenu' => $options['length_menu'],
         ];
         $vars['table_attr'] = [
-            'class' => $options['class'] .= ' datable',
+            'class' => trim(($options['class'] ?? '').' datable'),
         ];
         $vars['columns'] = array_map(fn (Column $c) => $this->columnView($c), $dataTable->getColumns());
 
@@ -90,13 +93,23 @@ class TableRenderer
         ];
 
         if ($options['paging']) {
-            $jsOptions['paging_id'] = 'id_paging';
+            $jsOptions['paging_id'] = $options['id'].'_paging';
+            $jsOptions['pageLength'] = $options['page_length'];
+            $jsOptions['pageActive'] = $options['page_active'];
             $jsOptions['paging'] = true;
         } else {
             $jsOptions['paging'] = false;
         }
 
         $jsOptions['ordering'] = $options['orderable'];
+
+        $jsOptions['messages'] = [
+            'empty' => $this->trans('table.empty'),
+            'loadError' => $this->trans('table.load_error'),
+            'actionError' => $this->trans('action.error'),
+            'previous' => $this->trans('paging.previous'),
+            'next' => $this->trans('paging.next'),
+        ];
 
         // columns options
         $jsOptions['columns'] = [];
@@ -106,7 +119,7 @@ class TableRenderer
             if ($column->isOrderable()) {
                 $jsOptions['order'][] = [
                     $name,
-                    strtolower($column->getDefaultOrder()),
+                    strtolower($column->getDefaultOrder() ?? 'ASC'),
                 ];
             }
 
@@ -116,6 +129,11 @@ class TableRenderer
         return $jsOptions;
     }
 
+    private function trans(string $key): string
+    {
+        return $this->translator->trans($key, [], 'da_table');
+    }
+
     protected function columnView(Column $column): array
     {
         $options = $column->getOptions();
@@ -123,8 +141,7 @@ class TableRenderer
         $vars = [];
         $vars['attr'] = [
             'class' => $options['class'],
-            'id' => $options['id'],
-            'order' => $column->getDefaultOrder(),
+            'data-column' => $options['id'],
             'style' => $options['width'] ? sprintf('width:%s', $options['width']) : null,
         ];
 

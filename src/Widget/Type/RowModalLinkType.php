@@ -21,7 +21,7 @@ class RowModalLinkType extends RowLinkType
             ->setDefault('stimulus', true)
             ->setDefault('text', false)
             ->setDefault('class', 'table-link')
-            ->setDefault('stimulus-controller', null);
+            ->setDefault('stimulus-controller', '@dannebicque/table-bundle/modal');
 //            ->setDefault('class', 'table-link')
 //            ->setDefault('class', 'table-link');
     }

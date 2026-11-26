@@ -9,6 +9,8 @@
 
 namespace Dannebicque\TableBundle\Column;
 
+use Dannebicque\TableBundle\Utils\HtmlUtils;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BadgeSeuilColumnType extends PropertyColumnType
@@ -17,11 +19,11 @@ class BadgeSeuilColumnType extends PropertyColumnType
     {
         foreach ($options['seuils'] as $seuil => $badge) {
             if ($value < $seuil) {
-                return sprintf('<span class="badge %s">%s<span>', $badge, $this->displayValue($value, $options));
+                return sprintf('<span class="badge %s">%s</span>', HtmlUtils::escape($badge), HtmlUtils::escape($this->displayValue($value, $options)));
             }
         }
 
-        return sprintf('<span class="badge %s">%s<span>', $options['badge_defaut'], $this->displayValue($value, $options));
+        return sprintf('<span class="badge %s">%s</span>', HtmlUtils::escape($options['badge_defaut']), HtmlUtils::escape($this->displayValue($value, $options)));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

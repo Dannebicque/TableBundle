@@ -9,6 +9,7 @@
 
 namespace Dannebicque\TableBundle\Column;
 
+use Dannebicque\TableBundle\Utils\HtmlUtils;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -23,7 +24,18 @@ class CheckBoxColumnType extends ColumnType
 
     public function render(mixed $rowData, array $options): string
     {
-        return '<div class="form-check"><input class="form-check-input position-static" type="checkbox"></div>';
+        $value = is_callable($options['value']) ? $options['value']($rowData) : $this->rowId($rowData);
+
+        return sprintf('<div class="form-check"><input class="form-check-input position-static row-selector" type="checkbox" value="%s"></div>', HtmlUtils::escape($value));
+    }
+
+    private function rowId(mixed $rowData): mixed
+    {
+        if (\is_array($rowData)) {
+            return $rowData['id'] ?? '';
+        }
+
+        return \is_object($rowData) && method_exists($rowData, 'getId') ? $rowData->getId() : '';
     }
 
     private function labelTemplate(): string
@@ -39,6 +51,8 @@ class CheckBoxColumnType extends ColumnType
         parent::configureOptions($resolver);
 
         $resolver
+            ->setDefault('value', null)
+            ->setAllowedTypes('value', ['null', 'callable'])
             ->setDefault('order', false)
             ->setDefault('class', 'text-center')
             ->setDefault('label', $this->labelTemplate())

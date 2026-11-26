@@ -22,7 +22,7 @@ class WidgetCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        $registry = $container->getDefinition('da_table.widget_registry');
+        $registry = $container->getDefinition(WidgetRegistry::class);
         $this->addToRegistry($container, $registry, WidgetRegistry::TAG_TYPE, 'registerType');
     }
 

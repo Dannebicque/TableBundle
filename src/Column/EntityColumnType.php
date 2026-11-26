@@ -57,7 +57,7 @@ class EntityColumnType extends ColumnType
             ->setRequired('display_field')
             ->setAllowedTypes('property_path', 'string')
             ->setAllowedTypes('display_field', 'string')
-            ->setDefault('order', null)
+            ->setDefault('order', false)
             ->setDefault('order_by', fn (Options $options) => $options['property_path']);
     }
 }

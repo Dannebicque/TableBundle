@@ -19,8 +19,12 @@ class TableResult
      */
     public function __construct(protected iterable $data = [], ?int $count = null)
     {
-        $this->nbResults = count($data);
-        $this->count = $count ?? count($data);
+        if (!is_countable($this->data)) {
+            $this->data = iterator_to_array($this->data, false);
+        }
+
+        $this->count = $count ?? count($this->data);
+        $this->nbResults = $this->count;
     }
 
     public function getData(): iterable

@@ -10,6 +10,7 @@
 namespace Dannebicque\TableBundle\Twig;
 
 use Dannebicque\TableBundle\TableRenderer;
+use Twig\DeprecatedCallableInfo;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -31,11 +32,12 @@ class TableExtension extends AbstractExtension
             new TwigFunction('table_render', [$this->renderer, 'render'], [
                 'is_safe' => ['html'],
             ]),
-            new TwigFunction('fitlers_render', [$this->renderer, 'renderToolbar'], [
+            new TwigFunction('filters_render', [$this->renderer, 'renderToolbar'], [
                 'is_safe' => ['html'],
             ]),
-            new TwigFunction('action_render', [$this->renderer, 'renderAction'], [
+            new TwigFunction('fitlers_render', [$this->renderer, 'renderToolbar'], [
                 'is_safe' => ['html'],
+                'deprecation_info' => new DeprecatedCallableInfo('dannebicque/table-bundle', '2.0', 'filters_render'),
             ]),
         ];
     }

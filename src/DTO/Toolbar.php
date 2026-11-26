@@ -48,9 +48,20 @@ class Toolbar
         return $this->formData;
     }
 
+    /**
+     * Les valeurs reçues passent par le formulaire : transformation de type et rejet des valeurs invalides.
+     */
     public function handleRequest(array $data): self
     {
-        $this->formData = $data;
+        if (!$this->form->isSubmitted()) {
+            $this->form->submit($data);
+        }
+
+        $formData = $this->form->getData();
+        $this->formData = array_filter(
+            \is_array($formData) ? $formData : [],
+            static fn (mixed $value): bool => null !== $value && '' !== $value && [] !== $value,
+        );
 
         return $this;
     }
@@ -59,13 +70,6 @@ class Toolbar
     {
         $name = $this->form->getName();
 
-        if (isset($data[$name]) && is_array($data[$name])) {
-            $this->form->submit($data[$name]);
-        }
-
-        $data = $this->form->getData();
-        $this->formData = $data ?? [];
-
-        return $this;
+        return $this->handleRequest(\is_array($data[$name] ?? null) ? $data[$name] : []);
     }
 }

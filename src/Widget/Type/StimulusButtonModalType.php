@@ -29,7 +29,7 @@ class StimulusButtonModalType extends WidgetType
         $view->element = 'button';
         $view->vars['attr']['type'] = 'button';
         $view->vars['attr']['class'] .= ' btn';
-        $view->vars['stimulus']['controller'] = 'modal';
+        $view->vars['stimulus']['controller'] = $options['stimulus-controller'];
         $view->vars['stimulus']['modalUrl'] = $options['modalUrl'];
         $view->vars['stimulus']['size'] = $options['modalSize'];
         $view->vars['stimulus']['title'] = $options['modalTitle'];
@@ -46,6 +46,7 @@ class StimulusButtonModalType extends WidgetType
 
         $resolver
             ->setDefault('text', null) // enable text
+            ->setDefault('stimulus-controller', '@dannebicque/table-bundle/modal')
             ->setDefault('modalSize', 'md') // enable text
             ->setDefault('modalTitle', null) // enable text
             ->setDefault('action', 'openModal') // enable text

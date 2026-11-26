@@ -9,7 +9,6 @@
 
 namespace Dannebicque\TableBundle\Column;
 
-use Carbon\Carbon;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -29,7 +28,7 @@ class PropertyColumnType extends ColumnType
 
     public function render(mixed $rowData, array $options): string
     {
-        return $this->renderProperty($this->accessor->getValue($rowData, $options['property_path']), $options);
+        return $this->renderProperty($this->getPropertyValue($rowData, $options['property_path']), $options);
     }
 
     public function renderProperty(mixed $value, array $options): string
@@ -51,10 +50,21 @@ class PropertyColumnType extends ColumnType
 
     public function displayValue(mixed $value, array $options): string
     {
-        if ($value instanceof Carbon) {
-            return $value->format($options['format_datetime']);
+        return match (true) {
+            $value instanceof \DateTimeInterface => $value->format($options['format_datetime']),
+            $value instanceof \BackedEnum => (string) $value->value,
+            $value instanceof \UnitEnum => $value->name,
+            default => (string) $value,
+        };
+    }
+
+    protected function getPropertyValue(mixed $rowData, string $path): mixed
+    {
+        // Lignes sous forme de tableaux (CallableAdapter) : « name » équivaut à « [name] »
+        if (\is_array($rowData) && !str_starts_with($path, '[')) {
+            $path = sprintf('[%s]', $path);
         }
 
-        return (string) $value;
+        return $this->accessor->getValue($rowData, $path);
     }
 }

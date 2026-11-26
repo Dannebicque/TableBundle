@@ -19,7 +19,8 @@ class RowShowLinkType extends RowLinkType
 
         $resolver
             ->setDefault('title', 'action.show')
-            ->setDefault('icon', $this->parameterBag->get('iconShow'))
+            ->setDefault('translation_domain', 'da_table')
+            ->setDefault('icon', $this->icons['show'] ?? null)
             ->setDefault('class', 'btn btn-square btn-info-outline btn-sm me-1');
     }
 }

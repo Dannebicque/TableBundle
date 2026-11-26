@@ -19,7 +19,12 @@ class RowDeleteLinkType extends RowLinkType
 
         $resolver
             ->setDefault('title', 'action.delete')
-            ->setDefault('icon', $this->parameterBag->get('iconDelete'))
+            ->setDefault('translation_domain', 'da_table')
+            ->setDefault('xhr', true)
+            ->setDefault('method', 'DELETE')
+            ->setDefault('csrf_token_id', 'delete')
+            ->setDefault('confirm', 'action.delete.confirm')
+            ->setDefault('icon', $this->icons['delete'] ?? null)
             ->setDefault('class', 'btn btn-square btn-danger-outline btn-sm me-1 supprimer'); // xhr-delete
     }
 }

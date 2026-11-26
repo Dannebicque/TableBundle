@@ -19,7 +19,8 @@ class RowDuplicateLinkType extends RowLinkType
 
         $resolver
             ->setDefault('title', 'action.duplicate')
-            ->setDefault('icon', $this->parameterBag->get('iconDuplicate'))
+            ->setDefault('translation_domain', 'da_table')
+            ->setDefault('icon', $this->icons['duplicate'] ?? null)
             ->setDefault('class', 'btn btn-square btn-success-outline btn-sm me-1');
     }
 }

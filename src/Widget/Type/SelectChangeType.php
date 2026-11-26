@@ -9,6 +9,7 @@
 
 namespace Dannebicque\TableBundle\Widget\Type;
 
+use Dannebicque\TableBundle\Security\ActionToken;
 use Dannebicque\TableBundle\Widget\DTO\WidgetView;
 use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +30,8 @@ class SelectChangeType extends WidgetType
     public function __construct(
         protected RouterInterface $router,
         protected TranslatorInterface $translator,
-        protected EntityManagerInterface $entityManager
+        protected EntityManagerInterface $entityManager,
+        protected ?ActionToken $actionToken = null
     ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
@@ -37,10 +39,15 @@ class SelectChangeType extends WidgetType
     public function buildView(WidgetView $view, array $options): void
     {
         parent::buildView($view, $options);
-        $view->vars['attr']['is'] = 'select-live-update';
+        $view->vars['attr']['data-live-update'] = true;
+        if (null !== $token = $this->actionToken?->get($options['csrf_token_id'])) {
+            $view->vars['attr']['data-token'] = $token;
+        }
         $view->vars['attr']['data-route'] = $this->router->generate($options['route'], $options['route_params']);
         $view->vars['attr']['data-params'] = json_encode($options['post_params'], JSON_THROW_ON_ERROR);
         $view->vars['value'] = $options['value'];
+        $view->vars['datas'] = [];
+        $view->element = 'select';
         $this->getDatas($view, $options);
     }
 
@@ -99,6 +106,11 @@ class SelectChangeType extends WidgetType
             ->setRequired('choices')
             ->setDefault('required', false)
             ->setDefault('class', 'form-control');
+
+        $resolver
+            ->define('csrf_token_id')
+            ->default('live_update')
+            ->allowedTypes('string', 'null');
 
         $resolver
             ->define('route_params')

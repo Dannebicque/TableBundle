@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0
+
+- Compatibilité Symfony 7.4 et 8.x ; abandon des versions antérieures.
+- Échappement des valeurs affichées (correctif XSS), filtres validés par le formulaire, taille de page bornée.
+- Doctrine devient optionnel.
+- JavaScript réécrit en contrôleurs Stimulus : actions, modale, CSRF, traductions.
+- Ruptures de compatibilité : voir [UPGRADE-2.0.md](UPGRADE-2.0.md).
+
 ## 1.0.2
 
 ## 1.0.1

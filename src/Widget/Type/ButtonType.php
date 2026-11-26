@@ -9,6 +9,7 @@
 
 namespace Dannebicque\TableBundle\Widget\Type;
 
+use Dannebicque\TableBundle\Security\ActionToken;
 use Dannebicque\TableBundle\Widget\DTO\WidgetView;
 use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use Symfony\Component\OptionsResolver\Options;
@@ -20,7 +21,7 @@ class ButtonType extends WidgetType
     /**
      * LinkType constructor.
      */
-    public function __construct(protected RouterInterface $router)
+    public function __construct(protected RouterInterface $router, protected ?ActionToken $actionToken = null)
     {
     }
 
@@ -30,7 +31,14 @@ class ButtonType extends WidgetType
         $view->element = 'button';
         $view->vars['attr']['type'] = 'button';
 
-        $view->vars['attr']['data-xhr'] = $options['url'];
+        if ($options['url']) {
+            $view->vars['attr']['data-xhr'] = $options['url'];
+            $view->vars['attr']['data-method'] = $options['method'];
+
+            if (null !== $token = $this->actionToken?->get($options['csrf_token_id'])) {
+                $view->vars['attr']['data-token'] = $token;
+            }
+        }
 
         if (!empty($options['confirm'])) {
             $view->vars['attr']['data-confirm'] = $options['confirm'];
@@ -74,6 +82,16 @@ class ButtonType extends WidgetType
             ->define('route_params')
             ->default([])
             ->allowedTypes('array');
+
+        $resolver
+            ->define('method')
+            ->default('GET')
+            ->allowedValues('GET', 'POST', 'PUT', 'PATCH', 'DELETE');
+
+        $resolver
+            ->define('csrf_token_id')
+            ->default(null)
+            ->allowedTypes('string', 'null');
 
         $resolver
             ->define('confirm')

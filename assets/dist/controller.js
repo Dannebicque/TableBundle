@@ -1,17 +1,12 @@
 import { Controller } from '@hotwired/stimulus';
-import Table from '../js/table/table'
+import Table from './table.js';
 
-/*
- * This is an example Stimulus controller!
- *
- * Any element with a data-controller="hello" attribute will cause
- * this controller to be executed. The name "hello" comes from the filename:
- * hello_controller.js -> "hello"
- *
- * Delete this file or adapt it for your use!
- */
 export default class extends Controller {
-  connect() {
-    customElements.define('my-table', Table)
-  }
+    connect() {
+        this.table = new Table(this.element);
+    }
+
+    disconnect() {
+        this.table.destroy();
+    }
 }

@@ -17,9 +17,10 @@ use Dannebicque\TableBundle\DTO\Table;
 use Dannebicque\TableBundle\DTO\Toolbar;
 use Dannebicque\TableBundle\Utils\HtmlUtils;
 use Dannebicque\TableBundle\Widget\Type\ButtonType;
+use Dannebicque\TableBundle\Widget\Type\WidgetType;
 use Dannebicque\TableBundle\Widget\WidgetBuilder;
 use InvalidArgumentException;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Dannebicque\TableBundle\Form\ToolbarType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -49,7 +50,7 @@ class TableBuilder
         $this->widgetBuilder = $this->helper->createWidgetBuilder();
         $this->formBuilder = $this->helper->createNamedFormBuilder(
             $this->options['toolbar_form_name'],
-            FormType::class,
+            ToolbarType::class,
             $this->options['toolbar_form_data'],
             $this->options['toolbar_form_options']
         );
@@ -85,7 +86,7 @@ class TableBuilder
 
     // Toolbar Api
 
-    public function addFilter(string|FormBuilderInterface $child, string $type = null, array $options = []): self
+    public function addFilter(string|FormBuilderInterface $child, ?string $type = null, array $options = []): self
     {
         $this->formBuilder->add($child, $type, $options);
 
@@ -104,7 +105,7 @@ class TableBuilder
         return $this->formBuilder->has($name);
     }
 
-    public function addWidget(string $child, string $type = null, array $options = []): self
+    public function addWidget(string $child, string $type = WidgetType::class, array $options = []): self
     {
         $this->widgetBuilder->add($child, $type, $options);
 
@@ -204,7 +205,8 @@ class TableBuilder
                 'icon' => 'fas fa-eraser',
                 'class' => 'btn btn-secondary',
                 'icon_only' => true,
-                'title' => 'Supprimer les filtres',
+                'title' => 'filters.erase',
+                'translation_domain' => 'da_table',
             ]);
         }
 

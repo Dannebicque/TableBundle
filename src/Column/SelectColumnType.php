@@ -9,6 +9,9 @@
 
 namespace Dannebicque\TableBundle\Column;
 
+use Dannebicque\TableBundle\Security\ActionToken;
+use Dannebicque\TableBundle\Utils\HtmlUtils;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use function is_callable;
@@ -17,14 +20,19 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SelectColumnType extends ColumnType
 {
     protected PropertyAccessorInterface $accessor;
 
-    public function __construct(protected TranslatorInterface $translator, protected EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        protected TranslatorInterface $translator,
+        protected EntityManagerInterface $entityManager,
+        protected RouterInterface $router,
+        protected ActionToken $actionToken,
+    ) {
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -32,22 +40,22 @@ class SelectColumnType extends ColumnType
     {
         $obj = $this->accessor->getValue($rowData, $options['property_path']); // on récupère l'objet de la liaison
 
-        $html = '<select class="'.$options['class_select'].'" >'; // name="'.$options['name'].'"
+        $html = '<select class="'.HtmlUtils::escape($options['class_select']).'"'.$this->liveUpdateAttributes($rowData, $options).'>';
 
         if (false === $options['required']) {
-            $html .= '<option value="" selected>Choisir</option>';
+            $html .= '<option value="" selected>'.HtmlUtils::escape($this->translator->trans('select.choose', [], 'da_table')).'</option>';
         }
 
         if (null !== $options['choices']) {
             // on a un tableau
             foreach ($options['choices'] as $key => $value) {
-                if (null !== $obj && $value === $obj->getId()) {
+                if (null !== $obj && $value === (\is_object($obj) ? $obj->getId() : $obj)) {
                     $selected = 'selected';
                 } else {
                     $selected = '';
                 }
 
-                $html .= '<option value="'.$value.'" '.$selected.'>'.$key.'</option>';
+                $html .= '<option value="'.HtmlUtils::escape($value).'" '.$selected.'>'.HtmlUtils::escape($key).'</option>';
             }
         } elseif (null !== $options['entity']) {
             $em = $this->entityManager->getRepository($options['entity']);
@@ -74,13 +82,40 @@ class SelectColumnType extends ColumnType
 
                 $lib = $this->accessor->getValue($data, $options['choice_label']);
 
-                $html .= '<option value="'.$data->getId().'" '.$selected.'>'.$lib.'</option>';
+                $html .= '<option value="'.HtmlUtils::escape($data->getId()).'" '.$selected.'>'.HtmlUtils::escape($lib).'</option>';
             }
         }
 
         $html .= '</select>';
 
         return $html;
+    }
+
+    private function liveUpdateAttributes(mixed $rowData, array $options): string
+    {
+        if (!$options['live_update']) {
+            return '';
+        }
+
+        $params = $options['live_update_params'] ?: [];
+        if (is_callable($params)) {
+            $params = $params($rowData);
+        }
+        $routeParams = $options['live_update_route_params'];
+        if (is_callable($routeParams)) {
+            $routeParams = $routeParams($rowData);
+        }
+
+        $attributes = [
+            'data-live-update' => '1',
+            'data-route' => $this->router->generate($options['live_update_path'], $routeParams),
+            'data-params' => json_encode((object) $params, JSON_THROW_ON_ERROR),
+        ];
+        if (null !== $token = $this->actionToken->get($options['csrf_token_id'])) {
+            $attributes['data-token'] = $token;
+        }
+
+        return ' '.trim(HtmlUtils::to_attr($attributes));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -103,6 +138,8 @@ class SelectColumnType extends ColumnType
             ->setDefault('live_update', false)
             ->setDefault('live_update_params', '')
             ->setDefault('live_update_path', '')
+            ->setDefault('live_update_route_params', [])
+            ->setDefault('csrf_token_id', 'live_update')
             ->setDefault('required', false);
     }
 }

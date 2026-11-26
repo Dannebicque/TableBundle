@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true" cacheDirectory=".phpunit.cache" failOnDeprecation="true" failOnWarning="true" failOnNotice="true">
+    <testsuites>
+        <testsuite name="TableBundle">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
+        <include><directory>src</directory></include>
+    </source>
+</phpunit>

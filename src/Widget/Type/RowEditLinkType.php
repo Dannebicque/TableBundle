@@ -19,7 +19,8 @@ class RowEditLinkType extends RowLinkType
 
         $resolver
             ->setDefault('title', 'action.edit')
-            ->setDefault('icon', $this->parameterBag->get('iconEdit'))
+            ->setDefault('translation_domain', 'da_table')
+            ->setDefault('icon', $this->icons['edit'] ?? null)
             ->setDefault('class', 'btn btn-square btn-warning-outline btn-sm me-1');
     }
 }

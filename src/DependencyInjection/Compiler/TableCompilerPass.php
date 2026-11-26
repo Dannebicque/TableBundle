@@ -22,7 +22,7 @@ class TableCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        $registry = $container->getDefinition('da_table.table_registry');
+        $registry = $container->getDefinition(TableRegistry::class);
         $this->addToRegistry($container, $registry, TableRegistry::TAG_ADAPTER, 'registerAdapter');
         $this->addToRegistry($container, $registry, TableRegistry::TAG_COLUMN_TYPE, 'registerColumnType');
         $this->addToRegistry($container, $registry, TableRegistry::TAG_TABLE_TYPE, 'registerType');

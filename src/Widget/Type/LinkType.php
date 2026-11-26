@@ -9,9 +9,9 @@
 
 namespace Dannebicque\TableBundle\Widget\Type;
 
+use Dannebicque\TableBundle\Security\ActionToken;
 use Dannebicque\TableBundle\Widget\DTO\WidgetView;
 use Dannebicque\TableBundle\Widget\WidgetBuilder;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,7 +21,7 @@ class LinkType extends WidgetType
     /**
      * LinkType constructor.
      */
-    public function __construct(protected RouterInterface $router, protected ParameterBagInterface $parameterBag)
+    public function __construct(protected RouterInterface $router, protected array $icons = [], protected ?ActionToken $actionToken = null)
     {
     }
 
@@ -34,9 +34,10 @@ class LinkType extends WidgetType
             if ($options['xhr']) {
                 $view->vars['attr']['href'] = '#'; // Link always have href
                 $view->vars['attr']['data-xhr'] = $options['url'];
+                $view->vars['attr']['data-method'] = $options['method'];
 
-                if (!empty($options['confirm'])) {
-                    $view->vars['attr']['data-confirm'] = $options['confirm'];
+                if (null !== $token = $this->actionToken?->get($options['csrf_token_id'])) {
+                    $view->vars['attr']['data-token'] = $token;
                 }
 
                 if ($options['spinner']) {
@@ -53,9 +54,15 @@ class LinkType extends WidgetType
             $view->vars['attr']['href'] = '#'; // Link always have href even if not link specified
         }
 
+        if (!empty($options['confirm'])) {
+            $view->vars['attr']['data-confirm'] = $options['confirm'];
+        }
+
         if ($options['stimulus']) {
             $view->vars['stimulus']['controller'] = $options['stimulus-controller'];
-            $view->vars['stimulus']['route'] = $this->router->generate($options['route'], $options['route_params']);
+            $view->vars['stimulus']['modalUrl'] = $options['url'];
+            $view->vars['stimulus']['size'] = $options['modal_size'];
+            $view->vars['stimulus']['title'] = $options['title'];
             $view->vars['stimulus']['action'] = 'openModal';
             $view->vars['attr']['href'] = '#';
         }
@@ -72,6 +79,8 @@ class LinkType extends WidgetType
         $resolver
             ->setDefault('text', null); // enable text
         $resolver->setDefault('stimulus', false); // désactive stimulus partout, par défaut
+        $resolver->setDefault('stimulus-controller', '@dannebicque/table-bundle/modal');
+        $resolver->setDefault('modal_size', 'md');
         $resolver
             ->define('route')
             ->default(null)
@@ -102,6 +111,16 @@ class LinkType extends WidgetType
             ->define('xhr')
             ->default(false)
             ->allowedTypes('bool');
+
+        $resolver
+            ->define('method')
+            ->default('GET')
+            ->allowedValues('GET', 'POST', 'PUT', 'PATCH', 'DELETE');
+
+        $resolver
+            ->define('csrf_token_id')
+            ->default(null)
+            ->allowedTypes('string', 'null');
 
         $resolver
             ->define('confirm')

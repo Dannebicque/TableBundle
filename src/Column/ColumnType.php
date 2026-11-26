@@ -17,7 +17,7 @@ class ColumnType
 {
     public function render(mixed $rowData, array $options): string
     {
-        return (string) $rowData;
+        return \is_scalar($rowData) || $rowData instanceof \Stringable ? (string) $rowData : '';
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -42,7 +42,7 @@ class ColumnType
             ->setNormalizer('render', fn (Options $options, $value) => $options['render_html'] ?? $value)
             ->setDefault('render_html', null)
             ->setAllowedTypes('render_html', ['null', 'callable'])
-            ->setDefault('is_safe_html', true)
+            ->setDefault('is_safe_html', false)
             ->setAllowedTypes('is_safe_html', 'bool')
             ->setNormalizer('is_safe_html', fn (Options $options, $value) => $options['render_html'] ? true : $value);
     }

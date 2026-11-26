@@ -9,13 +9,15 @@
 
 namespace Dannebicque\TableBundle\Column;
 
+use Dannebicque\TableBundle\Utils\HtmlUtils;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BadgeColumnType extends PropertyColumnType
 {
     public function renderProperty(mixed $value, array $options): string
     {
-        return sprintf('<span class="badge %s">%s<span>', $options['badge_class'], $value);
+        return sprintf('<span class="badge %s">%s</span>', HtmlUtils::escape($options['badge_class']), HtmlUtils::escape($this->displayValue($value, $options)));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

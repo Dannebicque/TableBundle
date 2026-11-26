@@ -1,11 +1,4 @@
 <?php
-/*
- * Copyright (c) 2022. | David Annebicque | IUT de Troyes  - All Rights Reserved
- * @file /Users/davidannebicque/Sites/intranetV3/bundles/TableBundle/src/DependencyInjection/services.php
- * @author davidannebicque
- * @project intranetV3
- * @lastUpdate 25/10/2022 22:24
- */
 
 namespace Dannebicque\TableBundle\DependencyInjection;
 
@@ -24,7 +17,15 @@ use Dannebicque\TableBundle\Column\ManyColumnType;
 use Dannebicque\TableBundle\Column\PropertyColumnType;
 use Dannebicque\TableBundle\Column\SelectColumnType;
 use Dannebicque\TableBundle\Column\WidgetColumnType;
+use Dannebicque\TableBundle\Form\ToolbarType;
+use Dannebicque\TableBundle\Security\ActionToken;
+use Dannebicque\TableBundle\TableBuilderHelper;
+use Dannebicque\TableBundle\TableFactory;
+use Dannebicque\TableBundle\TableInterface;
 use Dannebicque\TableBundle\TableRegistry;
+use Dannebicque\TableBundle\TableRenderer;
+use Dannebicque\TableBundle\Twig\TableExtension;
+use Dannebicque\TableBundle\Widget\Twig\WidgetExtension;
 use Dannebicque\TableBundle\Widget\Type\AddLinkType;
 use Dannebicque\TableBundle\Widget\Type\ButtonDropdownType;
 use Dannebicque\TableBundle\Widget\Type\ButtonGroupType;
@@ -40,7 +41,9 @@ use Dannebicque\TableBundle\Widget\Type\RowShowLinkType;
 use Dannebicque\TableBundle\Widget\Type\SelectChangeType;
 use Dannebicque\TableBundle\Widget\Type\StimulusButtonModalType;
 use Dannebicque\TableBundle\Widget\Type\WidgetType;
+use Dannebicque\TableBundle\Widget\WidgetFactory;
 use Dannebicque\TableBundle\Widget\WidgetRegistry;
+use Dannebicque\TableBundle\Widget\WidgetRenderer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $configurator): void {
@@ -49,6 +52,23 @@ return static function (ContainerConfigurator $configurator): void {
         ->private()
         ->autowire()
         ->autoconfigure(false);
+
+    $services->set(ActionToken::class);
+    $services->set(TableRegistry::class);
+    $services->set(WidgetRegistry::class);
+    $services->set(WidgetFactory::class);
+    $services->set(TableBuilderHelper::class);
+    $services->set(TableFactory::class);
+    $services->alias(TableInterface::class, TableFactory::class);
+    $services->set(TableRenderer::class);
+    $services->set(WidgetRenderer::class);
+    $services->set(TableExtension::class)->tag('twig.extension');
+    $services->set(WidgetExtension::class)->tag('twig.extension');
+    $services->set(ToolbarType::class)->tag('form.type');
+
+    // Anciens identifiants conservés
+    $services->alias('da_table.table_factory', TableFactory::class);
+    $services->alias('table.builder', TableFactory::class);
 
     $services->set(CallableAdapter::class)->tag(TableRegistry::TAG_ADAPTER);
     $services->set(EntityAdapter::class)->tag(TableRegistry::TAG_ADAPTER);
@@ -68,17 +88,17 @@ return static function (ContainerConfigurator $configurator): void {
     $services->set(WidgetColumnType::class)->tag(TableRegistry::TAG_COLUMN_TYPE);
 
     //Widget
-    $services->set(AddLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(AddLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
     $services->set(ButtonDropdownType::class)->tag(WidgetRegistry::TAG_TYPE);
     $services->set(ButtonGroupType::class)->tag(WidgetRegistry::TAG_TYPE);
     $services->set(ButtonType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(LinkType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(RowDeleteLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(RowEditLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(RowLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(RowModalLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(RowShowLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
-    $services->set(RowDuplicateLinkType::class)->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(LinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(RowDeleteLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(RowEditLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(RowLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(RowModalLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(RowShowLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
+    $services->set(RowDuplicateLinkType::class)->arg('$icons', '%da_table.icons%')->tag(WidgetRegistry::TAG_TYPE);
     $services->set(WidgetType::class)->tag(WidgetRegistry::TAG_TYPE);
     $services->set(SelectChangeType::class)->tag(WidgetRegistry::TAG_TYPE);
     $services->set(StimulusButtonModalType::class)->tag(WidgetRegistry::TAG_TYPE);
